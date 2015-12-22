@@ -1,0 +1,4 @@
+Change Component Footprint: Designator=J1 Old Footprint=MOLEX_AX12 New Footprint=MOLEX_AX12_3
+Change Component Footprint: Designator=J2 Old Footprint=MOLEX_AX12 New Footprint=MOLEX_AX12_3
+Change Component Footprint: Designator=J3 Old Footprint=MOLEX_AX12 New Footprint=MOLEX_AX12_3
+Added Member To Class: ClassName=Carte Emulateur AX12 Member=Component U1 DSPIC30F2010-30I/SO

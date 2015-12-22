@@ -1,0 +1,45 @@
+Added Component: Designator=C1(C0805)
+Added Component: Designator=C2(C0805)
+Added Component: Designator=C3(0805)
+Added Component: Designator=C4(C0805)
+Added Component: Designator=D1(C0805)
+Added Component: Designator=J1(MOLEX_AX12)
+Added Component: Designator=J2(MOLEX_AX12)
+Added Component: Designator=J3(MOLEX_AX12)
+Added Component: Designator=K1(IQXO-70)
+Added Component: Designator=R1(0805)
+Added Pin To Net: NetName=NetC1_1 Pin=C1-1
+Added Pin To Net: NetName=GND Pin=C1-2
+Added Pin To Net: NetName=NetC2_1 Pin=C2-1
+Added Pin To Net: NetName=GND Pin=C2-2
+Added Pin To Net: NetName=GND Pin=C3-1
+Added Pin To Net: NetName=NetC2_1 Pin=C3-2
+Added Pin To Net: NetName=NetC4_1 Pin=C4-1
+Added Pin To Net: NetName=GND Pin=C4-2
+Added Pin To Net: NetName=NetD1_1 Pin=D1-1
+Added Pin To Net: NetName=NetD1_2 Pin=D1-2
+Added Pin To Net: NetName=GND Pin=J1-1
+Added Pin To Net: NetName=NetJ1_2 Pin=J1-2
+Added Pin To Net: NetName=NetC1_1 Pin=J1-3
+Added Pin To Net: NetName=GND Pin=J2-1
+Added Pin To Net: NetName=NetJ1_2 Pin=J2-2
+Added Pin To Net: NetName=NetC1_1 Pin=J2-3
+Added Pin To Net: NetName=GND Pin=J3-1
+Added Pin To Net: NetName=NetJ1_2 Pin=J3-2
+Added Pin To Net: NetName=NetC1_1 Pin=J3-3
+Added Pin To Net: NetName=GND Pin=K1-2
+Added Pin To Net: NetName=NetK1_3 Pin=K1-3
+Added Pin To Net: NetName=NetC2_1 Pin=K1-4
+Added Pin To Net: NetName=NetD1_2 Pin=R1-1
+Added Pin To Net: NetName=GND Pin=R1-2
+Added Member To Class: ClassName=Carte Emulateur AX12 Member=Component C1 Cap Pol1
+Added Member To Class: ClassName=Carte Emulateur AX12 Member=Component C2 Cap Pol1
+Added Member To Class: ClassName=Carte Emulateur AX12 Member=Component C3 Cap
+Added Member To Class: ClassName=Carte Emulateur AX12 Member=Component C4 Cap Pol1
+Added Member To Class: ClassName=Carte Emulateur AX12 Member=Component D1 LED1
+Added Member To Class: ClassName=Carte Emulateur AX12 Member=Component J1 Alim AX12
+Added Member To Class: ClassName=Carte Emulateur AX12 Member=Component J2 Alim AX12
+Added Member To Class: ClassName=Carte Emulateur AX12 Member=Component J3 Alim AX12
+Added Member To Class: ClassName=Carte Emulateur AX12 Member=Component K1 CLOCK
+Added Member To Class: ClassName=Carte Emulateur AX12 Member=Component R1 Res1
+Added Room: Name=Carte Emulateur AX12
