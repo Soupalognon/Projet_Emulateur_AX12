@@ -10,9 +10,9 @@ CND_CONF=default
 CND_DISTDIR=dist
 TMPDIR=build/${CND_CONF}/${IMAGE_TYPE}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/dsPic30f2010-EmulateurAX12.X__Version_Test_4Mhz___PLLx16_.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-OUTPUT_BASENAME=dsPic30f2010-EmulateurAX12.X__Version_Test_4Mhz___PLLx16_.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-PACKAGE_TOP_DIR=dspic30f2010-emulateurax12.x(versiontest4mhz+pllx16)/
+OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/dsPic30f2010-EmulateurAX12.X__Version_4Mhz___PLLx16_.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+OUTPUT_BASENAME=dsPic30f2010-EmulateurAX12.X__Version_4Mhz___PLLx16_.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+PACKAGE_TOP_DIR=dspic30f2010-emulateurax12.x(version4mhz+pllx16)/
 
 # Functions
 function checkReturnCode
@@ -57,15 +57,15 @@ mkdir -p ${TMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory ${TMPDIR}/dspic30f2010-emulateurax12.x(versiontest4mhz+pllx16)/bin
+makeDirectory ${TMPDIR}/dspic30f2010-emulateurax12.x(version4mhz+pllx16)/bin
 copyFileToTmpDir "${OUTPUT_PATH}" "${TMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 
 # Generate tar file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/package/dspic30f2010-emulateurax12.x(versiontest4mhz+pllx16).tar
+rm -f ${CND_DISTDIR}/${CND_CONF}/package/dspic30f2010-emulateurax12.x(version4mhz+pllx16).tar
 cd ${TMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/dspic30f2010-emulateurax12.x(versiontest4mhz+pllx16).tar *
+tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/dspic30f2010-emulateurax12.x(version4mhz+pllx16).tar *
 checkReturnCode
 
 # Cleanup

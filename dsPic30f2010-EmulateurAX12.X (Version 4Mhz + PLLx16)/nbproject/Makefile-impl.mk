@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=dsPic30f2010-EmulateurAX12.X (Version Test 4Mhz + PLLx16)
+PROJECTNAME=dsPic30f2010-EmulateurAX12.X (Version 4Mhz + PLLx16)
 
 # Active Configuration
 DEFAULTCONF=default
