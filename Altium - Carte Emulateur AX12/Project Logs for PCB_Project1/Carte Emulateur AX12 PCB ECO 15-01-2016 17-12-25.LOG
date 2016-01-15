@@ -1,0 +1,28 @@
+Removed Pin From Net: NetName=GND Pin=*1-4
+Removed Pin From Net: NetName=Net*1_5 Pin=*1-5
+Removed Pin From Net: NetName=Net*1_5 Pin=*1-6
+Removed Pin From Net: NetName=Net*1_8 Pin=*1-8
+Removed Pin From Net: NetName=Net*1_5 Pin=R2-1
+Removed Pin From Net: NetName=Net*1_8 Pin=R2-2
+Removed Member From Class: ClassName=Carte Emulateur AX12 Member=R2
+Change Component DesignItemId : Designator=*1 Old DesignItemId=74LVC2G241 New DesignItemId=74AHC1G126D
+Change Component Footprint: Designator=*1 Old Footprint=TSSOP-ST8_N New Footprint=74AHC1G126DVBR
+Change Component Comment : Designator=*1 Old Comment=74LVC2G241 New Comment=74AHC1G126D
+Change Component Designator: OldDesignator=CLK NewDesignator=K1
+Change Component Designator: OldDesignator=IN NewDesignator=P2
+Change Component Designator: OldDesignator=OUT NewDesignator=P3
+Change Component Designator: OldDesignator=PROG NewDesignator=P1
+Change Component Designator: OldDesignator=PWM NewDesignator=P4
+Added Component: Designator=*2(74AHC1G126DVBR)
+Change Net Name : Old Net Name=Net*1_5 New Net Name=Net*1_A
+Change Net Name : Old Net Name=Net*1_8 New Net Name=Net*1_Vcc
+Added Pin To Net: NetName=Net*1_/OE Pin=U1-14
+Added Net: Name=Net*1_/OE
+Added Pin To Net: NetName=Net*1_Y Pin=U1-12
+Added Net: Name=Net*1_Y
+Added Pin To Net: NetName=Net*2_/OE Pin=U1-15
+Added Net: Name=Net*2_/OE
+Added Pin To Net: NetName=Net*2_A Pin=U1-11
+Added Net: Name=Net*2_A
+Added Member To Class: ClassName=Carte Emulateur AX12 Member=Component *2 74AHC1G126D
+Added Room: Name=Carte Emulateur AX12

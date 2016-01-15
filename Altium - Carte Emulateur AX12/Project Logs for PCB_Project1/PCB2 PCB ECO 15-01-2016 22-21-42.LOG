@@ -1,0 +1,15 @@
+Removed Pin From Net: NetName=Net*2_/OE Pin=U1-15
+Change Component Designator: OldDesignator=*1 NewDesignator=*2
+Change Component Designator: OldDesignator=*2 NewDesignator=*3
+Added Component: Designator=*1(SOIC16N_M)
+Added Pin To Net: NetName=GND Pin=*1-16
+Added Pin To Net: NetName=Net*2_/OE Pin=U1-14
+Change Net Name : Old Net Name=Net*1_A New Net Name=Net*2_A
+Change Net Name : Old Net Name=Net*1_Vcc New Net Name=Net*2_Vcc
+Added Pin To Net: NetName=Net*2_Y Pin=U1-12
+Added Net: Name=Net*2_Y
+Added Pin To Net: NetName=Net*3_/OE Pin=U1-15
+Added Net: Name=Net*3_/OE
+Added Pin To Net: NetName=Net*3_A Pin=U1-11
+Added Net: Name=Net*3_A
+Added Member To Class: ClassName=Carte Emulateur AX12 Member=Component *3 74AHC1G126D

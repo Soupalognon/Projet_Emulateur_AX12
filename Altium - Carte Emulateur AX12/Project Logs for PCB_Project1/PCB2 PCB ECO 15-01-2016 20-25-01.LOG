@@ -1,0 +1,54 @@
+Added Component: Designator=*1(74AHC1G126DVBR)
+Added Component: Designator=*2(74AHC1G126DVBR)
+Added Component: Designator=C1(C0805)
+Added Component: Designator=C2(C0805)
+Added Component: Designator=C3(0805)
+Added Component: Designator=C4(C0805)
+Added Component: Designator=D1(C0805)
+Added Component: Designator=J1(MOLEX_AX12_3)
+Added Component: Designator=J2(MOLEX_AX12_3)
+Added Component: Designator=J3(MOLEX_AX12_3)
+Added Component: Designator=K1(IQXO-70)
+Added Component: Designator=R1(0805)
+Added Pin To Net: NetName=GND Pin=C1-2
+Added Pin To Net: NetName=GND Pin=C2-2
+Added Pin To Net: NetName=GND Pin=C3-1
+Added Pin To Net: NetName=GND Pin=C4-2
+Added Pin To Net: NetName=GND Pin=J1-1
+Added Pin To Net: NetName=GND Pin=J2-1
+Added Pin To Net: NetName=GND Pin=J3-1
+Added Pin To Net: NetName=GND Pin=K1-2
+Added Pin To Net: NetName=GND Pin=R1-2
+Added Net: Name=GND
+Added Net: Name=Net*1_/OE
+Added Pin To Net: NetName=Net*1_A Pin=J1-3
+Added Pin To Net: NetName=Net*1_A Pin=J2-3
+Added Pin To Net: NetName=Net*1_A Pin=J3-3
+Added Net: Name=Net*1_A
+Added Pin To Net: NetName=Net*1_Vcc Pin=C2-1
+Added Pin To Net: NetName=Net*1_Vcc Pin=C3-2
+Added Pin To Net: NetName=Net*1_Vcc Pin=K1-4
+Added Net: Name=Net*1_Vcc
+Added Net: Name=Net*1_Y
+Added Net: Name=Net*2_/OE
+Added Net: Name=Net*2_A
+Added Pin To Net: NetName=NetC1_1 Pin=C1-1
+Added Pin To Net: NetName=NetC1_1 Pin=J1-2
+Added Pin To Net: NetName=NetC1_1 Pin=J2-2
+Added Pin To Net: NetName=NetC1_1 Pin=J3-2
+Added Net: Name=NetC1_1
+Added Pin To Net: NetName=NetC4_1 Pin=C4-1
+Added Net: Name=NetC4_1
+Added Pin To Net: NetName=NetD1_1 Pin=D1-1
+Added Net: Name=NetD1_1
+Added Pin To Net: NetName=NetD1_2 Pin=D1-2
+Added Pin To Net: NetName=NetD1_2 Pin=R1-1
+Added Net: Name=NetD1_2
+Added Pin To Net: NetName=NetK1_3 Pin=K1-3
+Added Net: Name=NetK1_3
+Added Net: Name=NetP1_1
+Added Net: Name=NetP1_4
+Added Net: Name=NetP1_5
+Added Net: Name=NetP4_3
+Added Class: Name=Carte Emulateur AX12
+Added Room: Name=Carte Emulateur AX12

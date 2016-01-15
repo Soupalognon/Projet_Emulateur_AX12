@@ -1,0 +1,13 @@
+Removed Pin From Net: NetName=Net*2_/OE Pin=U1-14
+Removed Member From Class: ClassName=Carte Emulateur AX12 Member=*3
+Added Component: Designator=*1(74AHC1G126DVBR)
+Added Pin To Net: NetName=Net*2_/OE Pin=U1-15
+Change Net Name : Old Net Name=Net*2_A New Net Name=Net*1_A
+Change Net Name : Old Net Name=Net*2_Vcc New Net Name=Net*1_Vcc
+Added Pin To Net: NetName=Net*1_/OE Pin=U1-14
+Added Net: Name=Net*1_/OE
+Added Pin To Net: NetName=Net*1_Y Pin=U1-12
+Added Net: Name=Net*1_Y
+Added Pin To Net: NetName=Net*2_A Pin=U1-11
+Added Net: Name=Net*2_A
+Added Member To Class: ClassName=Carte Emulateur AX12 Member=Component *1 74AHC1G126D

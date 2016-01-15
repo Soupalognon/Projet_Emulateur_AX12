@@ -1,0 +1,18 @@
+Change Component Designator: OldDesignator=CLK NewDesignator=K1
+Change Component Designator: OldDesignator=PROG NewDesignator=P1
+Change Component Designator: OldDesignator=PWM NewDesignator=P4
+Added Component: Designator=J4(74AHC1G126DVBR)
+Added Component: Designator=J5(74AHC1G126DVBR)
+Added Pin To Net: NetName=NetJ4_1 Pin=J4-1
+Added Pin To Net: NetName=NetJ1_3 Pin=J4-2
+Added Pin To Net: NetName=GND Pin=J4-3
+Added Pin To Net: NetName=NetJ4_4 Pin=J4-4
+Added Pin To Net: NetName=NetC2_1 Pin=J4-5
+Added Pin To Net: NetName=NetJ5_1 Pin=J5-1
+Added Pin To Net: NetName=NetJ5_2 Pin=J5-2
+Added Pin To Net: NetName=GND Pin=J5-3
+Added Pin To Net: NetName=NetJ1_3 Pin=J5-4
+Added Pin To Net: NetName=NetC2_1 Pin=J5-5
+Added Member To Class: ClassName=Carte Emulateur AX12 Member=Component J4 74AHC1G126D
+Added Member To Class: ClassName=Carte Emulateur AX12 Member=Component J5 74AHC1G126D
+Added Room: Name=Carte Emulateur AX12
