@@ -27,9 +27,9 @@ void PWM_init()
     PTCONbits.PTEN = 0; //Désactive les PWM
     
     //50 --> Prescaler      51 --> Periode
-    float Periode = lectureRAM(51); 
+    float Periode = lectureRAM(Periode_PWM); 
     Periode /= 1000;    //On doit passer de sec à msec
-    unsigned int Prescaler = lectureRAM(50);
+    unsigned int Prescaler = lectureRAM(Prescaler_PWM);
     
     PTPER = (FCY * Periode / Prescaler) - 1; //Configuration Periode PWM
     //PTPER = 19999; //Configuration Periode PWM à 20ms avec pescaler 1:16 
@@ -74,9 +74,9 @@ void PWM_init()
 
 void PWM_rapportCyclique(unsigned int rapport)
 {
-    float Periode = lectureRAM(51); 
+    float Periode = lectureRAM(Periode_PWM); 
     Periode /= 1000;    //On doit passer de sec à msec
-    unsigned short Prescaler = lectureRAM(50);
+    unsigned short Prescaler = lectureRAM(Prescaler_PWM);
     
     unsigned long temp = 2*(FCY * Periode / Prescaler);
     temp *= rapport;

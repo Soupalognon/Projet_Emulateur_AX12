@@ -13,8 +13,6 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
-
-#define PWM_START PTCONbits.PTEN     //Activation/Désactivation PWM
     
     unsigned int calculPrescaler(unsigned int ptmrPrescaler);
     void PWM_init();

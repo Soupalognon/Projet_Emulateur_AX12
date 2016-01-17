@@ -3,45 +3,45 @@
 int poubelle;   //Permet d'éviter un bug de réattribution de la première variable avec la dernière à chaque fois
 
 //Ram Config AX12
-int TEN;   //Torque Enable
-int LED;   //LED
-int PPL;    //Present Position (L)          //Fonction permettant de connaitre La position
-int PPH;     //Present Position (H)         //Fonction permettant de connaitre La position
-int GPL;   //Goal Position (L)              
-int GPH;   //Goal Position (H)              
-int MSL;   //Moving Speed (L)
-int MSH;   //Moving Speed (H)
-int PV;   //Present Voltage
-int PT;   //Present Temperature
-int RI;  //Registered Instruction
-int L;   //Lock
-int PLL;   //Punch (L)
-int PLH;   //Punch (H)
+int _TEN;   //Torque Enable
+int _LED;   //LED
+int _PPL;    //Present Position (L)          //Fonction permettant de connaitre La position
+int _PPH;     //Present Position (H)         //Fonction permettant de connaitre La position
+int _GPL;   //Goal Position (L)              
+int _GPH;   //Goal Position (H)              
+int _MSL;   //Moving Speed (L)
+int _MSH;   //Moving Speed (H)
+int _PV;   //Present Voltage
+int _PT;   //Present Temperature
+int _RI;  //Registered Instruction
+int _L;   //Lock
+int _PLL;   //Punch (L)
+int _PLH;   //Punch (H)
 
 //RAM config Moteur PWM
-unsigned short PrescalerPWM;
-unsigned short PeriodePWM;
-unsigned short RapportCycliquePWM;
+unsigned short _PrescalerPWM;
+unsigned short _PeriodePWM;
+unsigned short _RapportCycliquePWM;
 
 
 void RAM_init()
 {
-    TEN = 0;   //Torque Enable
-    LED = 0;   //LED
-    PPL = 0;    //Present Position (L)          //Fonction permettant de connaitre La position
-    PPH = 0;     //Present Position (H)         //Fonction permettant de connaitre La position            
-    MSL = 0;   //Moving Speed (L)
-    MSH = 0;   //Moving Speed (H)
-    RI = 0;  //Registered Instruction
-    L = 0;   //Lock
-    PLL = 32;   //Punch (L)
-    PLH = 0;   //Punch (H)
-    GPL = PPL;
-    GPH = PPH;
+    _TEN = 0;   //Torque Enable
+    _LED = 0;   //LED
+    _PPL = 0;    //Present Position (L)          //Fonction permettant de connaitre La position
+    _PPH = 0;     //Present Position (H)         //Fonction permettant de connaitre La position            
+    _MSL = 0;   //Moving Speed (L)
+    _MSH = 0;   //Moving Speed (H)
+    _RI = 0;  //Registered Instruction
+    _L = 0;   //Lock
+    _PLL = 32;   //Punch (L)
+    _PLH = 0;   //Punch (H)
+    _GPL = _PPL;
+    _GPH = _PPH;
     
-    PrescalerPWM = 16;
-    PeriodePWM = 20;
-    RapportCycliquePWM = 25;
+    _PrescalerPWM = 16;
+    _PeriodePWM = 2;
+    _RapportCycliquePWM = 25;
 }
 
 
@@ -50,43 +50,43 @@ void ecritureRAM(unsigned short adresse, unsigned short value)
     switch(adresse)
     {
         case 50:
-            PrescalerPWM = value;
+            _PrescalerPWM = value;
             break;
         case 51:
-            PeriodePWM = value;
+            _PeriodePWM = value;
             break;
         case 52:
-            RapportCycliquePWM = value;
+            _RapportCycliquePWM = value;
             break;
         case 24:
-            TEN = value;
+            _TEN = value;
             break;
         case 25:
-            LED = value;
+            _LED = value;
             break;
         case 30:
-            GPL = value;
+            _GPL = value;
             break;
         case 31:
-            GPH = value;
+            _GPH = value;
             break;
         case 32:
-            MSL = value;
+            _MSL = value;
             break;
         case 33:
-            MSH = value;
+            _MSH = value;
             break;
         case 44:
-            RI = value;
+            _RI = value;
             break;
         case 47:
-            L = value;
+            _L = value;
             break;
         case 48:
-            PLL = value;
+            _PLL = value;
             break;
         case 49:
-            PLH = value;
+            _PLH = value;
             break;
             
         default:
@@ -100,55 +100,55 @@ unsigned short lectureRAM(unsigned short adresse)
     switch(adresse)
     {
         case 50:
-            return PrescalerPWM;
+            return _PrescalerPWM;
             break;
         case 51:
-            return PeriodePWM;
+            return _PeriodePWM;
             break;
         case 52:
-            return RapportCycliquePWM;
+            return _RapportCycliquePWM;
             break;
         case 24:
-            return TEN;
+            return _TEN;
             break;
         case 25:
-            return LED;
+            return _LED;
             break;
         case 30:
-            return GPL;
+            return _GPL;
             break;
         case 31:
-            return GPH;
+            return _GPH;
             break;
         case 32:
-            return MSL;
+            return _MSL;
             break;
         case 33:
-            return MSH;
+            return _MSH;
             break;
         case 36:
-            return PPL;
+            return _PPL;
             break;
         case 37:
-            return PPH;
+            return _PPH;
             break;
         case 42:
-            return PV;
+            return _PV;
             break;
         case 43:
-            return PT;
+            return _PT;
             break;
         case 44:
-            return RI;
+            return _RI;
             break;
         case 47:
-            return L;
+            return _L;
             break;
         case 48:
-            return PLL;
+            return _PLL;
             break;
         case 49:
-            return PLH;
+            return _PLH;
             break;
             
         default:        //Ecrire l'erreur ICI

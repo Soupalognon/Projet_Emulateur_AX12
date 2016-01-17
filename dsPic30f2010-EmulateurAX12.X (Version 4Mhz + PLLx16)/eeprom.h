@@ -13,6 +13,7 @@
 #define ADDRESS_HI 0x7F
 //#define AdresseEE0 0x7FFC00
 
+
 unsigned short Eeprom_ReadWord(_prog_addressT pushAddress);
 void Eeprom_WriteWord(_prog_addressT Address, unsigned short Value);
 void ResetEpprom(void);

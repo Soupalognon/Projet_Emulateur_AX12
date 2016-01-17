@@ -22,7 +22,7 @@ void Interrupts_init()
     IEC0bits.U1TXIE = 0;
     IEC0bits.U1RXIE = 1;
     
-    //Interruptions Timer 2
+    //Interruptions Timer 2 (Pour Clignotement LED)
     PR2 = 0x7A12;   //500ms entre chaque inter
     T2CONbits.TCKPS = 3;    //Prescaler 1:256
     T2CONbits.TCS = 0;      //Utilise Fosc / 4 comme horloge
@@ -33,7 +33,7 @@ void Interrupts_init()
     IEC0bits.T2IE = 1;  //Active l'interruption du timer 2
     
     
-    //Interruption Timer 3
+    //Interruption Timer 3  (Pour temps d'attente entre deux données reçues)
     PR3 = 0x186A; //100ms entre chaque inter.
     T3CONbits.TCKPS = 3;    //Prescaler 1:256
     T3CONbits.TCS = 0;      //Utilise Fosc / 4 comme horloge
@@ -56,14 +56,14 @@ void __attribute__((interrupt,no_auto_psv)) _T2Interrupt(void)
     //Faite bipper la led 2 fois si il voit une erreur lié à la variable eeprom Alarm LED
     IFS0bits.T2IF = 0;
     
-    PORTBbits.RB0 = tempLED;
+    PORT_LED = tempLED;
     tempLED = !tempLED;
     bipLed++;
     
     if(bipLed > 3)
     {
         bipLed = 0;
-        T2CONbits.TON = 0;  //Désactive le timer
+        Avertissement_LED = Desactiver;  //Désactive le timer
     }
 }
 
@@ -73,7 +73,7 @@ void __attribute__((interrupt,no_auto_psv)) _T3Interrupt(void)
     //Si delai > 100ms alors on reset itr
     IFS0bits.T3IF = 0;
     
-    T3CONbits.TON = 0;  //Désactive le timer 3
+    Timer_Reception = Desactiver;  //Désactive le timer 3
     TMR3 = 0x00;
     
     reset_itr();
@@ -82,16 +82,11 @@ void __attribute__((interrupt,no_auto_psv)) _T3Interrupt(void)
 void __attribute__((interrupt,no_auto_psv)) _U1TXInterrupt(void)
 {
     IFS0bits.U1TXIF = 0;
-    
-    
-    //PORTBbits.RB0 = 1;
 }
 
 void __attribute__((interrupt,no_auto_psv)) _U1RXInterrupt(void)
 {
     IFS0bits.U1RXIF = 0;
     
-    UART_RX();
-    
-    //PORTBbits.RB0 = 1;
+    UART_RX(); 
 }

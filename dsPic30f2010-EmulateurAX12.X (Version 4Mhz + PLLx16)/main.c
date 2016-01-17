@@ -47,46 +47,30 @@ particular case.
 
 int main(int argc, char** argv) 
 {
-    Eeprom_WriteWord(4, 207);  //Baud Rate
+    //A enlever!!!
+    Eeprom_WriteWord(Baud, Baud_9600);  //Baud Rate
+    //
     UART_init();
     Interrupts_init();
     RAM_init();
-    PWM_init();   //Prescaleur 1:16   // Periode à 20ms
+    PWM_init();   //Prescaleur 1:16   // Periode à 2ms
     //ResetEpprom();
-    TRISB = 0;
-    T2CONbits.TON = 1;  //Fait clignoter la led 2 fois au démarrage
+    TRISB = Sortie;
+    TRISD = Sortie;
+    Avertissement_LED = Activer;  //Fait clignoter la led 2 fois au démarrage
     
-    /*
-    PWM_rapportCyclique(25);
-        PTCONbits.PTEN = 1;
-        while(PTCONbits.PTEN == 0); //Attend que la PWM soit activé
-    */
-    while(lectureRAM(47) == 0)  //Tand que le "lock" n'est pas activé.
+    //Active RX
+    PORT_RX = Active_RX;
+
+    while(lectureRAM(Lock) == Desactiver)  //Tand que le "lock" n'est pas activé.
     {
-        //PORTBbits.RB0 = 1;
         Verifications();    //Vérifie la tension et le courant max
         Interaction_LED();  //Fait clignoter la led si une erreur est trouvé
         Interaction_AlarmShutdown();
         Interaction_Position(); //Lance le moteur
-        
-        
-        
-        /*
-        if(Eeprom_ReadWord(3) == 12)
-            PORTEbits.RE2 = 1; //Allume la led
-        else if (Eeprom_ReadWord(3) != 12)
-            PORTEbits.RE2 = 0;   //Etteind la led
-        */
     }
     
     RAM_init(); //On reset toutes les données
     
     return (EXIT_SUCCESS);
 }
-
-/*
- PORTBbits.RB0 = 1;
-delay_ms(1000);
-PORTBbits.RB0 = 0;
-delay_ms(1000);
- */

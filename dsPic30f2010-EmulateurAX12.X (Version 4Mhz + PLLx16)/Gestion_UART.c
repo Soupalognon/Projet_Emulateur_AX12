@@ -7,7 +7,7 @@
 //Variables de gestion réception de données
 short itr = 0;
 unsigned short RXData[8];
-unsigned short ID;
+unsigned short _ID;
 unsigned short tailleRX;
 unsigned short Instruction;
 unsigned short CheckSumTrame;
@@ -38,7 +38,7 @@ void reset_itr()
 
 void UART_init()
 {
-    unsigned long baudRate = 2000000 / (Eeprom_ReadWord(4) + 1);
+    unsigned long baudRate = 2000000 / (Eeprom_ReadWord(Baud) + 1);
     U1BRG = (FCY/(16*baudRate)) - 1;
     //U1BRG = 4;     //Configure à 9600 baud pour Fosc à 20MHz   
     //U1BRG = 129;     //Configure à 9600 baud pour Fosc à 20MHz   
@@ -67,21 +67,23 @@ void UART_init()
 
 void UART_TX(unsigned short data)
 {    
-    
     while(U1STAbits.UTXBF); //On attend si le buffer est plein
     U1TXREG = data;
 }
 
-void envoi_Trame(unsigned short ID, unsigned short *parametres, unsigned short nbParametres)
+void envoi_Trame(unsigned short _ID, unsigned short *parametres, unsigned short nbParametres)
 {
-    int checkSum = ID + Erreur + nbParametres + 2;
+    int checkSum = _ID + Erreur + nbParametres + 2;
     int i;
     
-    delay_us(2 * Eeprom_ReadWord(5));   //On attend le temps configuré dans le "Return Delay"
+    //Active TX
+    PORT_TX = Active_TX;
+    
+    delay_us(2 * Eeprom_ReadWord(Delai_Retour_Transmission));   //On attend le temps configuré dans le "Return Delay"
     
     UART_TX(0xFF);
     UART_TX(0xFF);
-    UART_TX(ID);//ID
+    UART_TX(_ID);//ID
     UART_TX(nbParametres + 2);//Taille
     UART_TX(Erreur);
     for(i=0; i<nbParametres; i++)
@@ -89,7 +91,10 @@ void envoi_Trame(unsigned short ID, unsigned short *parametres, unsigned short n
         UART_TX(parametres[i]);
         checkSum += parametres[i];
     }
-    UART_TX(255 - checkSum%255);
+    UART_TX(255 - checkSum%256);
+    
+    //Active RX
+    PORT_RX = Active_RX;
 }
 
 
@@ -98,9 +103,9 @@ void UART_RX()
     //PORTBbits.RB0 = 1;
     
     //if(U1STAbits.FERR == 0) //Si le bit de stop du message est bien à 1
-    if(IFS0bits.T3IF == 0) //Si le delai de 100ms n'est pas passé
+    if(Flag_Timer_Reception == 0) //Si le delai de 100ms n'est pas passé
     {
-        T3CONbits.TON = 0;  //Désactive le timer 3
+        Timer_Reception = OFF;  //Désactive le timer 3
         TMR3 = 0x00;
         //IEC0bits.T3IE = 0;  //Desactive l'interruption du timer 3
         
@@ -129,7 +134,7 @@ void UART_RX()
         if(itr > (tailleRX + 3))    //Si on a tout recu
             lectureTrame();
 
-        T3CONbits.TON = 1;  //Active le timer 3 Pour vérifier le temps d'attente
+        Timer_Reception = ON;  //Active le timer 3 Pour vérifier le temps d'attente
         //IEC0bits.T3IE = 1;  //Active l'interruption du timer 3
     }
 }
@@ -139,7 +144,7 @@ void lectureTrame()
 {
     itr = 0;    //Si on arrive là alors sa veut dire que la réception est fini donc on reset l'iterateur de réception
     
-    ID = RXData[2];
+    _ID = RXData[2];
     Instruction = RXData[4];
     CheckSumTrame = RXData[tailleRX+3];
     unsigned short DerniereCheckSum = 0;
@@ -151,7 +156,7 @@ void lectureTrame()
         DerniereCheckSum += Para[i];
     }
     
-    DerniereCheckSum += ID + tailleRX + Instruction;
+    DerniereCheckSum += _ID + tailleRX + Instruction;
     DerniereCheckSum = 255 - DerniereCheckSum%255;
         
     if(CheckSumTrame == DerniereCheckSum)  
@@ -163,12 +168,12 @@ void lectureTrame()
     
     else    //Sinon Erreur il faut recommencer....
     {   
-        if(ID != 0xFE && Eeprom_ReadWord(16) != 0)
+        if(_ID != 0xFE && Eeprom_ReadWord(Status_Return_Level) != 0)
         {
             //Car il ne faut pas qu'il renvoi si ils sont plusieurs
             calculErreur(CHECKSUM_ERR);
             unsigned short parametres[] = {};
-            envoi_Trame(ID, parametres, 0);
+            envoi_Trame(_ID, parametres, 0);
             calculErreur(RESET_ERR);
         }
     }
@@ -196,39 +201,38 @@ void calculErreur(int tempErreur)
 
 void analyseTrame()
 {
-    if(ID == Eeprom_ReadWord(0x03)  ||  ID == 0xFE)
+    if(_ID == Eeprom_ReadWord(ID)  ||  _ID == 0xFE)
     {
         //Alors l'ID est le miens ou celui de tout le monde
         
-        //PORTBbits.RB0 = 1;
-        if(Instruction == PING && ID != 0xFE && Eeprom_ReadWord(16) != 0)   
+        if(Instruction == PING && _ID != 0xFE && Eeprom_ReadWord(Status_Return_Level) != 0)   
         {
             //Car il ne faut pas qu'il renvoi si ils sont plusieurs
             unsigned short parametres[] = {};
-            envoi_Trame(ID, parametres, 0);
+            envoi_Trame(_ID, parametres, 0);
         }
         
-        else if(Instruction == READ && ID != 0xFE && Eeprom_ReadWord(16) != 0)  
+        else if(Instruction == READ && _ID != 0xFE && Eeprom_ReadWord(Status_Return_Level) != 0)  
         {
             //Eeprom_ReadWord(16) != 0 donc configurer pour répondre
             //ID != 0xFE car il ne faut pas qu'il renvoi si ils sont plusieurs
             if(Para[0] >= 0 && Para[0] <= 23)    
             {
-                unsigned short d = Eeprom_ReadWord(Para[0]);
-                unsigned short temp[] = {d};
-                envoi_Trame(ID, temp, 1);
+                unsigned short data = Eeprom_ReadWord(Para[0]);
+                unsigned short temp[] = {data};
+                envoi_Trame(_ID, temp, 1);
             }
             else if(Para[0] >= 24  &&  Para[0] < 53)
             {
-                unsigned short d = lectureRAM(Para[0]);
-                unsigned short temp[] = {Para[0], d};
-                envoi_Trame(ID, temp, 2);
+                unsigned short data = lectureRAM(Para[0]);
+                unsigned short temp[] = {Para[0], data};
+                envoi_Trame(_ID, temp, 2);
             }
             else
             {
                 calculErreur(INST_ERR);
                 unsigned short parametres[] = {};
-                envoi_Trame(ID, parametres, 0);
+                envoi_Trame(_ID, parametres, 0);
                 calculErreur(RESET_ERR);
                 //Cette adresse n'existe pas ou n'est pas dans la ram ou l'eeprom
             }
@@ -251,10 +255,10 @@ void analyseTrame()
                 //Cette adresse n'existe pas ou n'est pas dans la ram
             }
 
-            if(ID != 0xFE && Eeprom_ReadWord(16) == 2)
+            if(_ID != 0xFE && Eeprom_ReadWord(Status_Return_Level) == 2)
             {
                 unsigned short parametres[] = {Para[0], Para[1]};
-                envoi_Trame(ID, parametres, 2);
+                envoi_Trame(_ID, parametres, 2);
                 calculErreur(RESET_ERR);
             }
             
@@ -275,14 +279,14 @@ void analyseTrame()
             for(i=0; i<tailleRX-2; i++)
                 bufferParametres[i] = Para[i];
             
-            ecritureRAM(44, 1); //Dit qu'il est pret pour une instruction ACTION
+            ecritureRAM(Registre_Instruction, 1); //Dit qu'il est pret pour une instruction ACTION
         }
         
         else if(Instruction == ACTION)
         {
-            if(lectureRAM(44) == 1)
+            if(lectureRAM(Registre_Instruction) == 1)
             {
-                ecritureRAM(44, 0);  //reset du flag
+                ecritureRAM(Registre_Instruction, 0);  //reset du flag
                 
                 if(Para[0] >= 0 && Para[0] < 24)
                 {
@@ -304,10 +308,10 @@ void analyseTrame()
                 calculErreur(INST_ERR);
             }
             
-            if(ID != 0xFE && Eeprom_ReadWord(16) == 2)
+            if(_ID != 0xFE && Eeprom_ReadWord(Status_Return_Level) == 2)
             {
                 unsigned short parametres[] = {};
-                envoi_Trame(ID, parametres, 0);
+                envoi_Trame(_ID, parametres, 0);
             }
             calculErreur(RESET_ERR);
         }
@@ -316,10 +320,10 @@ void analyseTrame()
         {
             ResetEpprom();
             RAM_init();
-            if(ID != 0xFE && Eeprom_ReadWord(16) == 2)
+            if(_ID != 0xFE && Eeprom_ReadWord(Status_Return_Level) == 2)
             {
                 unsigned short parametres[] = {};
-                unsigned short tempID = Eeprom_ReadWord(3);
+                unsigned short tempID = Eeprom_ReadWord(ID);
                 envoi_Trame(tempID, parametres, 0);
             }
             calculErreur(RESET_ERR);
@@ -327,30 +331,30 @@ void analyseTrame()
         
         else if(Instruction == SYNC_WRITE)
         {
-            if(lectureRAM(44))  //reset du flag)
+            if(lectureRAM(Registre_Instruction))  //reset du flag)
             {
-                ecritureRAM(44, 0);  //reset du flag
+                ecritureRAM(Registre_Instruction, 0);  //reset du flag
             }
             else
             {
                 calculErreur(INST_ERR);
             }
             
-            if(ID != 0xFE && Eeprom_ReadWord(16) == 2)
+            if(_ID != 0xFE && Eeprom_ReadWord(Status_Return_Level) == 2)
             {
                 unsigned short parametres[] = {};
-                envoi_Trame(ID, parametres, 0);
+                envoi_Trame(_ID, parametres, 0);
             }
             calculErreur(RESET_ERR);
         }
         
         else
         {
-            if(Eeprom_ReadWord(16) == 2 && ID != 0xFE)
+            if(_ID != 0xFE && Eeprom_ReadWord(Status_Return_Level) == 2)
             {
                 calculErreur(INST_ERR);
                 unsigned short parametres[] = {};
-                envoi_Trame(ID, parametres, 0);
+                envoi_Trame(_ID, parametres, 0);
             }
             calculErreur(RESET_ERR);
         }

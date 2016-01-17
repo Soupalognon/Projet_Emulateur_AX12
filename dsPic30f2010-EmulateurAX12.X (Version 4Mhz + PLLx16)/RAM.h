@@ -10,10 +10,7 @@ void RAM_init();
 void ecritureRAM(unsigned short adresse, unsigned short value);
 unsigned short lectureRAM(unsigned short adresse);
 
-
-
 /*
-
  Attribution des cases mémoires RAM:
  * 24 --> Torque Enable
  * 25 --> LED

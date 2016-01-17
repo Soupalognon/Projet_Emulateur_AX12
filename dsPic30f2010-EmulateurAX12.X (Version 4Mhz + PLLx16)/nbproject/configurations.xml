@@ -12,6 +12,7 @@
       <itemPath>Interaction_Moteur.h</itemPath>
       <itemPath>Gestion_Interruption.h</itemPath>
       <itemPath>PWM.h</itemPath>
+      <itemPath>Fichier_Define.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"

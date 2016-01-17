@@ -1,5 +1,5 @@
 #include "eeprom.h"
-
+#include "Gestion_UART.h"
  
 extern unsigned short _EEDATA(2) ushEepromData[]  
    #ifdef extern 
@@ -91,7 +91,7 @@ void ResetEpprom(void)
     //_prog_addressT temp = AdresseEE0;
     
     Eeprom_WriteWord(3, 12);  //ID
-    Eeprom_WriteWord(4, 207);  //Baud Rate
+    Eeprom_WriteWord(4, Baud_9600);  //Baud Rate
     Eeprom_WriteWord(5, 250);  //Return Delay
     Eeprom_WriteWord(14, 255); //Max Torque (L)
     Eeprom_WriteWord(15, 3);   //Max Torque (H))
