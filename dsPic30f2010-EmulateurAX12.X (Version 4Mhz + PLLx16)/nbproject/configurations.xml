@@ -13,6 +13,7 @@
       <itemPath>Gestion_Interruption.h</itemPath>
       <itemPath>PWM.h</itemPath>
       <itemPath>Fichier_Define.h</itemPath>
+      <itemPath>CAN10bits.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -28,6 +29,7 @@
       <itemPath>Interaction_Moteur.c</itemPath>
       <itemPath>Gestion_Interruption.c</itemPath>
       <itemPath>PWM.c</itemPath>
+      <itemPath>CAN10bits.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

@@ -3,6 +3,7 @@
 #include "RAM.h"
 #include "Interaction_Moteur.h"
 #include "PWM.h"
+#include "CAN10bits.h"
 
 //Variables de gestion réception de données
 short itr = 0;
@@ -188,13 +189,13 @@ void calculErreur(int tempErreur)
 {
     if(tempErreur == INST_ERR) //Signifie qu'il y a une erreur d'instruction
         Erreur |= 1 << 6;
-    else if(tempErreur == CHECKSUM_ERR)
+    if(tempErreur == CHECKSUM_ERR)
         Erreur |= 1 << 4;
-    else if(tempErreur == TEMP_ERR)    //Signigfie que le moteur est trop chaud/froid
+    if(tempErreur == TEMP_ERR)    //Signigfie que le moteur est trop chaud/froid
         Erreur |= 1 << 2;
-    else if(tempErreur == VOLT_ERR)    //Signifie erreur de sur/sous voltage
+    if(tempErreur == VOLT_ERR)    //Signifie erreur de sur/sous voltage
         Erreur |= 1 << 0;
-    else if(tempErreur == RESET_ERR)
+    if(tempErreur == RESET_ERR)
         Erreur = 0;
 }
 
@@ -364,5 +365,21 @@ void analyseTrame()
         //Alors l'ID n'est pas le bon. On ne lit pas l'information
     {
         //PORTBbits.RB0 = 0;
+    }
+}
+
+void Verif_Tension()
+{
+    unsigned int Tension = LectureTensionMoteur();
+    
+    ecritureRAM(Voltage, Tension);
+    
+    if(Tension > lectureRAM(TensionMax))
+    {
+        calculErreur(VOLT_ERR);
+    }
+    else if(Tension < lectureRAM(TensionMin))
+    {
+        calculErreur(VOLT_ERR);
     }
 }

@@ -18,3 +18,4 @@ void analyseTrame();
 void UART_init();
 void calculErreur(int tempErreur);
 void reset_itr();
+void Verif_Tension();

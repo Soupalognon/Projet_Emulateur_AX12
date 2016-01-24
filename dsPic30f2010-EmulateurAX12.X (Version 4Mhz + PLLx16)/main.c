@@ -44,20 +44,23 @@ particular case.
 #include "Interaction_Moteur.h"
 #include "Gestion_Interruption.h"
 #include "PWM.h"
+#include "CAN10bits.h"
 
 int main(int argc, char** argv) 
 {
     //A enlever!!!
     Eeprom_WriteWord(Baud, Baud_9600);  //Baud Rate
     //
+    TRISB = Sortie;
+    TRISD = Sortie;
+    Avertissement_LED = Activer;  //Fait clignoter la led 2 fois au démarrage
+    
     UART_init();
     Interrupts_init();
     RAM_init();
     PWM_init();   //Prescaleur 1:16   // Periode à 2ms
+    CAN_init();
     //ResetEpprom();
-    TRISB = Sortie;
-    TRISD = Sortie;
-    Avertissement_LED = Activer;  //Fait clignoter la led 2 fois au démarrage
     
     //Active RX
     PORT_RX = Active_RX;
@@ -66,7 +69,7 @@ int main(int argc, char** argv)
     {
         Verifications();    //Vérifie la tension et le courant max
         Interaction_LED();  //Fait clignoter la led si une erreur est trouvé
-        Interaction_AlarmShutdown();
+        Interaction_AlarmShutdown();    //Arreter le moteur si une erreur grave est trouvé
         Interaction_Position(); //Lance le moteur
     }
     

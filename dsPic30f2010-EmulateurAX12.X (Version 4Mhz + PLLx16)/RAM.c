@@ -23,6 +23,9 @@ unsigned short _PrescalerPWM;
 unsigned short _PeriodePWM;
 unsigned short _RapportCycliquePWM;
 
+float _TensionMax;   //En Volt
+float _TensionMin;
+
 
 void RAM_init()
 {
@@ -42,6 +45,9 @@ void RAM_init()
     _PrescalerPWM = 16;
     _PeriodePWM = 2;
     _RapportCycliquePWM = 25;
+    
+    _TensionMax = 9.6;
+    _TensionMin = 9.6;
 }
 
 
@@ -49,15 +55,6 @@ void ecritureRAM(unsigned short adresse, unsigned short value)
 {
     switch(adresse)
     {
-        case 50:
-            _PrescalerPWM = value;
-            break;
-        case 51:
-            _PeriodePWM = value;
-            break;
-        case 52:
-            _RapportCycliquePWM = value;
-            break;
         case 24:
             _TEN = value;
             break;
@@ -88,6 +85,21 @@ void ecritureRAM(unsigned short adresse, unsigned short value)
         case 49:
             _PLH = value;
             break;
+        case 50:
+            _PrescalerPWM = value;
+            break;
+        case 51:
+            _PeriodePWM = value;
+            break;
+        case 52:
+            _RapportCycliquePWM = value;
+            break;
+        case 53:
+            _TensionMax = value;
+            break;
+        case 54:
+            _TensionMin = value;
+            break;
             
         default:
             break;
@@ -99,15 +111,6 @@ unsigned short lectureRAM(unsigned short adresse)
 {
     switch(adresse)
     {
-        case 50:
-            return _PrescalerPWM;
-            break;
-        case 51:
-            return _PeriodePWM;
-            break;
-        case 52:
-            return _RapportCycliquePWM;
-            break;
         case 24:
             return _TEN;
             break;
@@ -149,6 +152,21 @@ unsigned short lectureRAM(unsigned short adresse)
             break;
         case 49:
             return _PLH;
+            break;
+        case 50:
+            return _PrescalerPWM;
+            break;
+        case 51:
+            return _PeriodePWM;
+            break;
+        case 52:
+            return _RapportCycliquePWM;
+            break;
+        case 53:
+            return _TensionMax;
+            break;
+        case 54:
+            return _TensionMin;
             break;
             
         default:        //Ecrire l'erreur ICI

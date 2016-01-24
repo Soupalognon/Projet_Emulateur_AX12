@@ -22,6 +22,7 @@ Command:
   build/default/production/Interaction_Moteur.o \
   build/default/production/Gestion_Interruption.o \
   build/default/production/PWM.o \
+  build/default/production/CAN10bits.o \
   --defsym=__MPLAB_BUILD=1 \
   -Tp30F2010.gld.00 \
   --stack=16 \
@@ -64,9 +65,9 @@ g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(divsf3.
 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(divsi3.eo)
                               build/default/production/Gestion_UART.o (___divsi3)
 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
-                              build/default/production/PWM.o (___fixunssfsi)
+                              build/default/production/RAM.o (___fixunssfsi)
 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
-                              build/default/production/PWM.o (___floatunsisf)
+                              build/default/production/RAM.o (___floatunsisf)
 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(fpack.eo)
                               g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(addsf3.eo) (__fpack)
 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(funpack.eo)
@@ -96,18 +97,18 @@ Program Memory  [Origin = 0x100, Length = 0x1f00]
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x100               0x6ac           0xa02  (2562)
-.text                        0x7ac               0xa86           0xfc9  (4041)
-.init.delay32               0x1232                0x1c            0x2a  (42)
-.dinit                      0x124e                0x1c            0x2a  (42)
+.text                        0x7ac               0xb6e          0x1125  (4389)
+.dinit                      0x131a                0x24            0x36  (54)
+.init.delay32               0x133e                0x1c            0x2a  (42)
 
-                     Total program memory used (bytes):         0x1a1f  (6687) 56%
+                     Total program memory used (bytes):         0x1b87  (7047) 59%
 
 
 Data EEPROM Memory  [Origin = 0x7ffc00, Length = 0x400]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-_030D1240569b9bd8         0x7ffc00                 0x2             0x2  (2)
+_02F7B2A056a52c94         0x7ffc00                 0x2             0x2  (2)
 
                         Total data EEPROM used (bytes):            0x2  (2) <1%
 
@@ -116,11 +117,12 @@ Data Memory  [Origin = 0x800, Length = 0x200]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-.nbss                        0x800                   0            0x42  (66)
-.ndata                       0x842                   0             0x2  (2)
-.nbss                        0x844                   0             0x2  (2)
+.nbss                        0x800                   0            0x4a  (74)
+.ndata                       0x84a                   0             0x2  (2)
+.nbss                        0x84c                   0             0x2  (2)
+.ndata                       0x84e                   0             0x2  (2)
 
-                        Total data memory used (bytes):           0x46  (70) 13%
+                        Total data memory used (bytes):           0x50  (80) 15%
 
 
 Dynamic Memory Usage
@@ -128,9 +130,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0x846                               0x1ba  (442)
+stack                        0x850                               0x1b0  (432)
 
-                        Maximum dynamic memory (bytes):          0x1ba  (442)
+                        Maximum dynamic memory (bytes):          0x1b0  (432)
 
 
 External Symbols in Data Memory (by address):
@@ -153,29 +155,33 @@ External Symbols in Data Memory (by address):
                     0x081e                  __PrescalerPWM
                     0x0820                  __PeriodePWM
                     0x0822                  __RapportCycliquePWM
-                    0x0824                  _itr
-                    0x0826                  _RXData
-                    0x0836                  __ID
-                    0x0838                  _tailleRX
-                    0x083a                  _Instruction
-                    0x083c                  _CheckSumTrame
-                    0x083e                  _Erreur
-                    0x0840                  _Para
-                    0x0840                  _bufferInstruction
-                    0x0842                  _tempLED
-                    0x0842                  _bufferParametres
-                    0x0844                  _bipLed
+                    0x0824                  __TensionMax
+                    0x0828                  __TensionMin
+                    0x082c                  _itr
+                    0x082e                  _RXData
+                    0x083e                  __ID
+                    0x0840                  _tailleRX
+                    0x0842                  _Instruction
+                    0x0844                  _CheckSumTrame
+                    0x0846                  _Erreur
+                    0x0848                  _Para
+                    0x0848                  _bufferInstruction
+                    0x084a                  _tempLED
+                    0x084a                  _bufferParametres
+                    0x084c                  _bipLed
+                    0x084e                  _TAD
 
 External Symbols in Data Memory (by name):
 
-                    0x083c                  _CheckSumTrame
-                    0x083e                  _Erreur
-                    0x083a                  _Instruction
-                    0x0840                  _Para
-                    0x0826                  _RXData
+                    0x0844                  _CheckSumTrame
+                    0x0846                  _Erreur
+                    0x0842                  _Instruction
+                    0x0848                  _Para
+                    0x082e                  _RXData
+                    0x084e                  _TAD
                     0x080c                  __GPH
                     0x080a                  __GPL
-                    0x0836                  __ID
+                    0x083e                  __ID
                     0x0818                  __L
                     0x0804                  __LED
                     0x0810                  __MSH
@@ -191,13 +197,15 @@ External Symbols in Data Memory (by name):
                     0x0816                  __RI
                     0x0822                  __RapportCycliquePWM
                     0x0802                  __TEN
-                    0x0844                  _bipLed
-                    0x0840                  _bufferInstruction
-                    0x0842                  _bufferParametres
-                    0x0824                  _itr
+                    0x0824                  __TensionMax
+                    0x0828                  __TensionMin
+                    0x084c                  _bipLed
+                    0x0848                  _bufferInstruction
+                    0x084a                  _bufferParametres
+                    0x082c                  _itr
                     0x0800                  _poubelle
-                    0x0838                  _tailleRX
-                    0x0842                  _tempLED
+                    0x0840                  _tailleRX
+                    0x084a                  _tempLED
 
 External Symbols in Data EEPROM (by address):
 
@@ -249,51 +257,57 @@ External Symbols in Program Memory (by address):
                   0x0008d8                  _UART_RX
                   0x000936                  _lectureTrame
                   0x0009f6                  _calculErreur
-                  0x000a42                  _analyseTrame
-                  0x000c84                  _RAM_init
-                  0x000cb4                  _ecritureRAM
-                  0x000d64                  _lectureRAM
-                  0x000e04                  _calculPrescaler
-                  0x000e2e                  _PWM_init
-                  0x000ecc                  _PWM_rapportCyclique
-                  0x000f46                  _Verifications
-                  0x000f50                  _Interaction_LED
-                  0x000fda                  _Interaction_Position
-                  0x001000                  _Interaction_AlarmShutdown
-                  0x001070                  _Eeprom_ReadWord
-                  0x0010a4                  _Eeprom_WriteWord
-                  0x0010ee                  _ResetEpprom
-                  0x001134                  _Interrupts_init
-                  0x001176                  __T2Interrupt
-                  0x0011b0                  __T3Interrupt
-                  0x0011d2                  __U1TXInterrupt
-                  0x0011da                  __U1RXInterrupt
-                  0x0011f8                  _main
-                  0x001232                  ___delay32
+                  0x000a3a                  _analyseTrame
+                  0x000c7c                  _Verif_Tension
+                  0x000ca6                  _RAM_init
+                  0x000ce6                  _ecritureRAM
+                  0x000db2                  _lectureRAM
+                  0x000e6a                  _calculPrescaler
+                  0x000e94                  _PWM_init
+                  0x000f32                  _PWM_rapportCyclique
+                  0x000fac                  _Verifications
+                  0x000fb8                  _Interaction_LED
+                  0x001042                  _Interaction_Position
+                  0x001068                  _Interaction_AlarmShutdown
+                  0x0010d8                  _Eeprom_ReadWord
+                  0x00110c                  _Eeprom_WriteWord
+                  0x001156                  _ResetEpprom
+                  0x00119c                  _Interrupts_init
+                  0x0011de                  __T2Interrupt
+                  0x001218                  __T3Interrupt
+                  0x00123a                  __U1TXInterrupt
+                  0x001242                  __U1RXInterrupt
+                  0x001260                  _CAN_init
+                  0x0012a8                  _LectureTensionMoteur
+                  0x0012de                  _main
+                  0x00133e                  ___delay32
 
 External Symbols in Program Memory (by name):
 
-                  0x001070                  _Eeprom_ReadWord
-                  0x0010a4                  _Eeprom_WriteWord
-                  0x001000                  _Interaction_AlarmShutdown
-                  0x000f50                  _Interaction_LED
-                  0x000fda                  _Interaction_Position
-                  0x001134                  _Interrupts_init
-                  0x000e2e                  _PWM_init
-                  0x000ecc                  _PWM_rapportCyclique
-                  0x000c84                  _RAM_init
-                  0x0010ee                  _ResetEpprom
+                  0x001260                  _CAN_init
+                  0x0010d8                  _Eeprom_ReadWord
+                  0x00110c                  _Eeprom_WriteWord
+                  0x001068                  _Interaction_AlarmShutdown
+                  0x000fb8                  _Interaction_LED
+                  0x001042                  _Interaction_Position
+                  0x00119c                  _Interrupts_init
+                  0x0012a8                  _LectureTensionMoteur
+                  0x000e94                  _PWM_init
+                  0x000f32                  _PWM_rapportCyclique
+                  0x000ca6                  _RAM_init
+                  0x001156                  _ResetEpprom
                   0x0008d8                  _UART_RX
                   0x000826                  _UART_TX
                   0x0007c4                  _UART_init
-                  0x000f46                  _Verifications
+                  0x000c7c                  _Verif_Tension
+                  0x000fac                  _Verifications
                   0x00019a                  __DefaultInterrupt
-                  0x001176                  __T2Interrupt
-                  0x0011b0                  __T3Interrupt
-                  0x0011da                  __U1RXInterrupt
-                  0x0011d2                  __U1TXInterrupt
+                  0x0011de                  __T2Interrupt
+                  0x001218                  __T3Interrupt
+                  0x001242                  __U1RXInterrupt
+                  0x00123a                  __U1TXInterrupt
                   0x0001f0                  ___addsf3
-                  0x001232                  ___delay32
+                  0x00133e                  ___delay32
                   0x0005fc                  ___divdi3
                   0x0002aa                  ___divsf3
                   0x00032e                  ___divsi3
@@ -323,16 +337,16 @@ External Symbols in Program Memory (by name):
                   0x0003fc                  __funpack2
                   0x00012c                  __psv_init
                   0x000100                  __resetPRI
-                  0x000a42                  _analyseTrame
+                  0x000a3a                  _analyseTrame
                   0x0009f6                  _calculErreur
-                  0x000e04                  _calculPrescaler
-                  0x000cb4                  _ecritureRAM
+                  0x000e6a                  _calculPrescaler
+                  0x000ce6                  _ecritureRAM
                   0x00083e                  _envoi_Trame
                   0x0007ac                  _get_Erreur
                   0x0007b4                  _get_tailleRX
-                  0x000d64                  _lectureRAM
+                  0x000db2                  _lectureRAM
                   0x000936                  _lectureTrame
-                  0x0011f8                  _main
+                  0x0012de                  _main
                   0x0007bc                  _reset_itr
 
 Memory Configuration
@@ -367,6 +381,7 @@ LOAD build/default/production/RAM.o
 LOAD build/default/production/Interaction_Moteur.o
 LOAD build/default/production/Gestion_Interruption.o
 LOAD build/default/production/PWM.o
+LOAD build/default/production/CAN10bits.o
                     0x0001                  __MPLAB_BUILD = 0x1
 LOAD p30F2010
 LOAD g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libfx-elf.a
@@ -526,56 +541,61 @@ userdata
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x2eb6
+.debug_info       0x000000       0x374e
  *(.debug_info)
  .debug_info      0x000000        0x301 build/default/production/main.o
  .debug_info      0x000301        0x41b build/default/production/eeprom.o
- .debug_info      0x00071c        0xcb4 build/default/production/Gestion_UART.o
- .debug_info      0x0013d0        0x404 build/default/production/RAM.o
- .debug_info      0x0017d4        0x586 build/default/production/Interaction_Moteur.o
- .debug_info      0x001d5a        0x969 build/default/production/Gestion_Interruption.o
- .debug_info      0x0026c3        0x7f3 build/default/production/PWM.o
+ .debug_info      0x00071c        0xce9 build/default/production/Gestion_UART.o
+ .debug_info      0x001405        0x44b build/default/production/RAM.o
+ .debug_info      0x001850        0x586 build/default/production/Interaction_Moteur.o
+ .debug_info      0x001dd6        0x969 build/default/production/Gestion_Interruption.o
+ .debug_info      0x00273f        0x7f3 build/default/production/PWM.o
+ .debug_info      0x002f32        0x81c build/default/production/CAN10bits.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x766
+.debug_abbrev     0x000000        0x868
  *(.debug_abbrev)
  .debug_abbrev    0x000000         0xd4 build/default/production/main.o
  .debug_abbrev    0x0000d4        0x145 build/default/production/eeprom.o
- .debug_abbrev    0x000219        0x1cd build/default/production/Gestion_UART.o
- .debug_abbrev    0x0003e6         0xb5 build/default/production/RAM.o
- .debug_abbrev    0x00049b         0xc9 build/default/production/Interaction_Moteur.o
- .debug_abbrev    0x000564         0xed build/default/production/Gestion_Interruption.o
- .debug_abbrev    0x000651        0x115 build/default/production/PWM.o
+ .debug_abbrev    0x000219        0x1e2 build/default/production/Gestion_UART.o
+ .debug_abbrev    0x0003fb         0xb5 build/default/production/RAM.o
+ .debug_abbrev    0x0004b0         0xc9 build/default/production/Interaction_Moteur.o
+ .debug_abbrev    0x000579         0xed build/default/production/Gestion_Interruption.o
+ .debug_abbrev    0x000666        0x115 build/default/production/PWM.o
+ .debug_abbrev    0x00077b         0xed build/default/production/CAN10bits.o
 
-.debug_line       0x000000       0x1230
+.debug_line       0x000000       0x140f
  *(.debug_line)
- .debug_line      0x000000        0x12b build/default/production/main.o
- .debug_line      0x00012b        0x1cb build/default/production/eeprom.o
- .debug_line      0x0002f6        0x637 build/default/production/Gestion_UART.o
- .debug_line      0x00092d        0x26b build/default/production/RAM.o
- .debug_line      0x000b98        0x22f build/default/production/Interaction_Moteur.o
- .debug_line      0x000dc7        0x23b build/default/production/Gestion_Interruption.o
- .debug_line      0x001002        0x22e build/default/production/PWM.o
+ .debug_line      0x000000        0x133 build/default/production/main.o
+ .debug_line      0x000133        0x1cb build/default/production/eeprom.o
+ .debug_line      0x0002fe        0x684 build/default/production/Gestion_UART.o
+ .debug_line      0x000982        0x2ab build/default/production/RAM.o
+ .debug_line      0x000c2d        0x237 build/default/production/Interaction_Moteur.o
+ .debug_line      0x000e64        0x23b build/default/production/Gestion_Interruption.o
+ .debug_line      0x00109f        0x22e build/default/production/PWM.o
+ .debug_line      0x0012cd        0x142 build/default/production/CAN10bits.o
 
-.debug_frame      0x000000        0x25c
+.debug_frame      0x000000        0x2a0
  *(.debug_frame)
  .debug_frame     0x000000         0x24 build/default/production/main.o
  .debug_frame     0x000024         0x44 build/default/production/eeprom.o
- .debug_frame     0x000068         0xb4 build/default/production/Gestion_UART.o
- .debug_frame     0x00011c         0x44 build/default/production/RAM.o
- .debug_frame     0x000160         0x54 build/default/production/Interaction_Moteur.o
- .debug_frame     0x0001b4         0x64 build/default/production/Gestion_Interruption.o
- .debug_frame     0x000218         0x44 build/default/production/PWM.o
+ .debug_frame     0x000068         0xc4 build/default/production/Gestion_UART.o
+ .debug_frame     0x00012c         0x44 build/default/production/RAM.o
+ .debug_frame     0x000170         0x54 build/default/production/Interaction_Moteur.o
+ .debug_frame     0x0001c4         0x64 build/default/production/Gestion_Interruption.o
+ .debug_frame     0x000228         0x44 build/default/production/PWM.o
+ .debug_frame     0x00026c         0x34 build/default/production/CAN10bits.o
 
-.debug_str        0x000000        0x158
+.debug_str        0x000000        0x19a
  *(.debug_str)
  .debug_str       0x000000          0xa build/default/production/main.o
  .debug_str       0x00000a         0x16 build/default/production/eeprom.o
  .debug_str       0x000020         0x79 build/default/production/Gestion_UART.o
- .debug_str       0x000099         0x2e build/default/production/RAM.o
- .debug_str       0x0000c7         0x1e build/default/production/Interaction_Moteur.o
- .debug_str       0x0000e5         0x3c build/default/production/Gestion_Interruption.o
- .debug_str       0x000121         0x37 build/default/production/PWM.o
+ .debug_str       0x000099         0x46 build/default/production/RAM.o
+ .debug_str       0x0000df         0x1e build/default/production/Interaction_Moteur.o
+ .debug_str       0x0000fd         0x3c build/default/production/Gestion_Interruption.o
+ .debug_str       0x000139         0x37 build/default/production/PWM.o
+ .debug_str       0x000170         0x2a build/default/production/CAN10bits.o
 
 .debug_loc
  *(.debug_loc)
@@ -584,27 +604,29 @@ userdata
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x3dd
+                  0x000000        0x44f
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0x1b build/default/production/main.o
  .debug_pubnames
                   0x00001b         0x53 build/default/production/eeprom.o
  .debug_pubnames
-                  0x00006e        0x132 build/default/production/Gestion_UART.o
+                  0x00006e        0x144 build/default/production/Gestion_UART.o
  .debug_pubnames
-                  0x0001a0         0xfe build/default/production/RAM.o
+                  0x0001b2        0x11e build/default/production/RAM.o
  .debug_pubnames
-                  0x00029e         0x6f build/default/production/Interaction_Moteur.o
+                  0x0002d0         0x6f build/default/production/Interaction_Moteur.o
  .debug_pubnames
-                  0x00030d         0x85 build/default/production/Gestion_Interruption.o
+                  0x00033f         0x85 build/default/production/Gestion_Interruption.o
  .debug_pubnames
-                  0x000392         0x4b build/default/production/PWM.o
+                  0x0003c4         0x4b build/default/production/PWM.o
+ .debug_pubnames
+                  0x00040f         0x40 build/default/production/CAN10bits.o
 
 .debug_ranges
  *(.debug_ranges)
 
-.debug_aranges    0x000000         0xa8
+.debug_aranges    0x000000         0xc0
  *(.debug_aranges)
  .debug_aranges
                   0x000000         0x18 build/default/production/main.o
@@ -620,6 +642,8 @@ userdata
                   0x000078         0x18 build/default/production/Gestion_Interruption.o
  .debug_aranges
                   0x000090         0x18 build/default/production/PWM.o
+ .debug_aranges
+                  0x0000a8         0x18 build/default/production/CAN10bits.o
 
 .ivt              0x000004         0x7c
                   0x000004          0x4 LONG 0x19a DEFINED (__ReservedTrap0)?ABSOLUTE (__ReservedTrap0):ABSOLUTE (__DefaultInterrupt)
@@ -636,11 +660,11 @@ userdata
                   0x00001a          0x4 LONG 0x19a DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00001c          0x4 LONG 0x19a DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00001e          0x4 LONG 0x19a DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000020          0x4 LONG 0x1176 DEFINED (__T2Interrupt)?ABSOLUTE (__T2Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000022          0x4 LONG 0x11b0 DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000020          0x4 LONG 0x11de DEFINED (__T2Interrupt)?ABSOLUTE (__T2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000022          0x4 LONG 0x1218 DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000024          0x4 LONG 0x19a DEFINED (__SPI1Interrupt)?ABSOLUTE (__SPI1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000026          0x4 LONG 0x11da DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000028          0x4 LONG 0x11d2 DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000026          0x4 LONG 0x1242 DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000028          0x4 LONG 0x123a DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00002a          0x4 LONG 0x19a DEFINED (__ADCInterrupt)?ABSOLUTE (__ADCInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00002c          0x4 LONG 0x19a DEFINED (__NVMInterrupt)?ABSOLUTE (__NVMInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00002e          0x4 LONG 0x19a DEFINED (__SI2CInterrupt)?ABSOLUTE (__SI2CInterrupt):ABSOLUTE (__DefaultInterrupt)
@@ -700,11 +724,11 @@ userdata
                   0x00009a          0x4 LONG 0x19a DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00009c          0x4 LONG 0x19a DEFINED (__AltIC2Interrupt)?ABSOLUTE (__AltIC2Interrupt):DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00009e          0x4 LONG 0x19a DEFINED (__AltOC2Interrupt)?ABSOLUTE (__AltOC2Interrupt):DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000a0          0x4 LONG 0x1176 DEFINED (__AltT2Interrupt)?ABSOLUTE (__AltT2Interrupt):DEFINED (__T2Interrupt)?ABSOLUTE (__T2Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000a2          0x4 LONG 0x11b0 DEFINED (__AltT3Interrupt)?ABSOLUTE (__AltT3Interrupt):DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000a0          0x4 LONG 0x11de DEFINED (__AltT2Interrupt)?ABSOLUTE (__AltT2Interrupt):DEFINED (__T2Interrupt)?ABSOLUTE (__T2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000a2          0x4 LONG 0x1218 DEFINED (__AltT3Interrupt)?ABSOLUTE (__AltT3Interrupt):DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000a4          0x4 LONG 0x19a DEFINED (__AltSPI1Interrupt)?ABSOLUTE (__AltSPI1Interrupt):DEFINED (__SPI1Interrupt)?ABSOLUTE (__SPI1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000a6          0x4 LONG 0x11da DEFINED (__AltU1RXInterrupt)?ABSOLUTE (__AltU1RXInterrupt):DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000a8          0x4 LONG 0x11d2 DEFINED (__AltU1TXInterrupt)?ABSOLUTE (__AltU1TXInterrupt):DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000a6          0x4 LONG 0x1242 DEFINED (__AltU1RXInterrupt)?ABSOLUTE (__AltU1RXInterrupt):DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000a8          0x4 LONG 0x123a DEFINED (__AltU1TXInterrupt)?ABSOLUTE (__AltU1TXInterrupt):DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000aa          0x4 LONG 0x19a DEFINED (__AltADCInterrupt)?ABSOLUTE (__AltADCInterrupt):DEFINED (__ADCInterrupt)?ABSOLUTE (__ADCInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000ac          0x4 LONG 0x19a DEFINED (__AltNVMInterrupt)?ABSOLUTE (__AltNVMInterrupt):DEFINED (__NVMInterrupt)?ABSOLUTE (__NVMInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000ae          0x4 LONG 0x19a DEFINED (__AltSI2CInterrupt)?ABSOLUTE (__AltSI2CInterrupt):DEFINED (__SI2CInterrupt)?ABSOLUTE (__SI2CInterrupt):ABSOLUTE (__DefaultInterrupt)
@@ -1192,79 +1216,83 @@ LOAD default_isr
 LOAD data_init
 
 .debug_pubtypes
-                  0x0000a8        0x2ea
+                  0x0000c0        0x37c
  .debug_pubtypes
-                  0x0000a8         0x31 build/default/production/main.o
+                  0x0000c0         0x31 build/default/production/main.o
  .debug_pubtypes
-                  0x0000d9         0x46 build/default/production/eeprom.o
+                  0x0000f1         0x46 build/default/production/eeprom.o
  .debug_pubtypes
-                  0x00011f         0x8e build/default/production/Gestion_UART.o
+                  0x000137         0x8e build/default/production/Gestion_UART.o
  .debug_pubtypes
-                  0x0001ad         0x12 build/default/production/RAM.o
+                  0x0001c5         0x12 build/default/production/RAM.o
  .debug_pubtypes
-                  0x0001bf         0x6f build/default/production/Interaction_Moteur.o
+                  0x0001d7         0x6f build/default/production/Interaction_Moteur.o
  .debug_pubtypes
-                  0x00022e         0xcc build/default/production/Gestion_Interruption.o
+                  0x000246         0xcc build/default/production/Gestion_Interruption.o
  .debug_pubtypes
-                  0x0002fa         0x98 build/default/production/PWM.o
+                  0x000312         0x98 build/default/production/PWM.o
+ .debug_pubtypes
+                  0x0003aa         0x92 build/default/production/CAN10bits.o
 
 __c30_signature
-                  0x000392         0x9c
+                  0x00043c         0xa2
  __c30_signature
-                  0x000392          0x6 build/default/production/main.o
+                  0x00043c          0x6 build/default/production/main.o
  __c30_signature
-                  0x000398          0x6 build/default/production/eeprom.o
+                  0x000442          0x6 build/default/production/eeprom.o
  __c30_signature
-                  0x00039e          0x6 build/default/production/Gestion_UART.o
+                  0x000448          0x6 build/default/production/Gestion_UART.o
  __c30_signature
-                  0x0003a4          0x6 build/default/production/RAM.o
+                  0x00044e          0x6 build/default/production/RAM.o
  __c30_signature
-                  0x0003aa          0x6 build/default/production/Interaction_Moteur.o
+                  0x000454          0x6 build/default/production/Interaction_Moteur.o
  __c30_signature
-                  0x0003b0          0x6 build/default/production/Gestion_Interruption.o
+                  0x00045a          0x6 build/default/production/Gestion_Interruption.o
  __c30_signature
-                  0x0003b6          0x6 build/default/production/PWM.o
+                  0x000460          0x6 build/default/production/PWM.o
  __c30_signature
-                  0x0003bc          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libpic30-elf.a(crt0_standard.o)
+                  0x000466          0x6 build/default/production/CAN10bits.o
  __c30_signature
-                  0x0003c2          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libpic30-elf.a(data_init_standard.o)
+                  0x00046c          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libpic30-elf.a(crt0_standard.o)
  __c30_signature
-                  0x0003c8          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libpic30-elf.a(eedata_helper.eo)
+                  0x000472          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libpic30-elf.a(data_init_standard.o)
  __c30_signature
-                  0x0003ce          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libpic30-elf.a(delay32.eo)
+                  0x000478          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libpic30-elf.a(eedata_helper.eo)
  __c30_signature
-                  0x0003d4          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(addsf3.eo)
+                  0x00047e          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libpic30-elf.a(delay32.eo)
  __c30_signature
-                  0x0003da          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(divsf3.eo)
+                  0x000484          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(addsf3.eo)
  __c30_signature
-                  0x0003e0          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(divsi3.eo)
+                  0x00048a          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(divsf3.eo)
  __c30_signature
-                  0x0003e6          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
+                  0x000490          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(divsi3.eo)
  __c30_signature
-                  0x0003ec          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
+                  0x000496          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
  __c30_signature
-                  0x0003f2          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(fpack.eo)
+                  0x00049c          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
  __c30_signature
-                  0x0003f8          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(funpack.eo)
+                  0x0004a2          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(fpack.eo)
  __c30_signature
-                  0x0003fe          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(funpack2.eo)
+                  0x0004a8          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(funpack.eo)
  __c30_signature
-                  0x000404          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x0004ae          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(funpack2.eo)
  __c30_signature
-                  0x00040a          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
+                  0x0004b4          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(futil.eo)
  __c30_signature
-                  0x000410          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
+                  0x0004ba          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
  __c30_signature
-                  0x000416          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(divmoddi3.eo)
+                  0x0004c0          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
  __c30_signature
-                  0x00041c          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(muldi3.eo)
+                  0x0004c6          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(divmoddi3.eo)
  __c30_signature
-                  0x000422          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
+                  0x0004cc          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(muldi3.eo)
  __c30_signature
-                  0x000428          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(umuldi3.eo)
+                  0x0004d2          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
+ __c30_signature
+                  0x0004d8          0x6 g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libm-elf.a(umuldi3.eo)
 
-.nbss               0x0800         0x42
- .nbss              0x0800         0x24 build/default/production/RAM.o
+.nbss               0x0800         0x4a
+ .nbss              0x0800         0x2c build/default/production/RAM.o
                     0x0800                  _poubelle
                     0x0802                  __TEN
                     0x0804                  __LED
@@ -1283,25 +1311,31 @@ __c30_signature
                     0x081e                  __PrescalerPWM
                     0x0820                  __PeriodePWM
                     0x0822                  __RapportCycliquePWM
- .nbss              0x0824         0x1e build/default/production/Gestion_UART.o
-                    0x0824                  _itr
-                    0x0826                  _RXData
-                    0x0836                  __ID
-                    0x0838                  _tailleRX
-                    0x083a                  _Instruction
-                    0x083c                  _CheckSumTrame
-                    0x083e                  _Erreur
-                    0x0840                  _bufferInstruction
-                    0x0840                  _Para
-                    0x0842                  _bufferParametres
+                    0x0824                  __TensionMax
+                    0x0828                  __TensionMin
+ .nbss              0x082c         0x1e build/default/production/Gestion_UART.o
+                    0x082c                  _itr
+                    0x082e                  _RXData
+                    0x083e                  __ID
+                    0x0840                  _tailleRX
+                    0x0842                  _Instruction
+                    0x0844                  _CheckSumTrame
+                    0x0846                  _Erreur
+                    0x0848                  _bufferInstruction
+                    0x0848                  _Para
+                    0x084a                  _bufferParametres
 
-.ndata              0x0842          0x2
- .ndata             0x0842          0x2 build/default/production/Gestion_Interruption.o
-                    0x0842                  _tempLED
+.ndata              0x084a          0x2
+ .ndata             0x084a          0x2 build/default/production/Gestion_Interruption.o
+                    0x084a                  _tempLED
 
-.nbss               0x0844          0x2
- .nbss              0x0844          0x2 build/default/production/Gestion_Interruption.o
-                    0x0844                  _bipLed
+.nbss               0x084c          0x2
+ .nbss              0x084c          0x2 build/default/production/Gestion_Interruption.o
+                    0x084c                  _bipLed
+
+.ndata              0x084e          0x2
+ .ndata             0x084e          0x2 build/default/production/CAN10bits.o
+                    0x084e                  _TAD
 
 .config_ICS       0xf8000c          0x2
  .config_ICS      0xf8000c          0x2 build/default/production/main.o
@@ -1320,8 +1354,8 @@ __c30_signature
  .config_FCKSMEN
                   0xf80000          0x2 build/default/production/main.o
 
-.text             0x0007ac        0xa86
- .text            0x0007ac        0x4d8 build/default/production/Gestion_UART.o
+.text             0x0007ac        0xb6e
+ .text            0x0007ac        0x4fa build/default/production/Gestion_UART.o
                   0x0007ac                  _get_Erreur
                   0x0007b4                  _get_tailleRX
                   0x0007bc                  _reset_itr
@@ -1331,42 +1365,46 @@ __c30_signature
                   0x0008d8                  _UART_RX
                   0x000936                  _lectureTrame
                   0x0009f6                  _calculErreur
-                  0x000a42                  _analyseTrame
- .text            0x000c84        0x180 build/default/production/RAM.o
-                  0x000c84                  _RAM_init
-                  0x000cb4                  _ecritureRAM
-                  0x000d64                  _lectureRAM
- .text            0x000e04        0x142 build/default/production/PWM.o
-                  0x000e04                  _calculPrescaler
-                  0x000e2e                  _PWM_init
-                  0x000ecc                  _PWM_rapportCyclique
- .text            0x000f46        0x12a build/default/production/Interaction_Moteur.o
-                  0x000f46                  _Verifications
-                  0x000f50                  _Interaction_LED
-                  0x000fda                  _Interaction_Position
-                  0x001000                  _Interaction_AlarmShutdown
- .text            0x001070         0xc4 build/default/production/eeprom.o
-                  0x001070                  _Eeprom_ReadWord
-                  0x0010a4                  _Eeprom_WriteWord
-                  0x0010ee                  _ResetEpprom
- .text            0x001134         0xc4 build/default/production/Gestion_Interruption.o
-                  0x001134                  _Interrupts_init
-                  0x001176                  __T2Interrupt
-                  0x0011b0                  __T3Interrupt
-                  0x0011d2                  __U1TXInterrupt
-                  0x0011da                  __U1RXInterrupt
- .text            0x0011f8         0x3a build/default/production/main.o
-                  0x0011f8                  _main
+                  0x000a3a                  _analyseTrame
+                  0x000c7c                  _Verif_Tension
+ .text            0x000ca6        0x1c4 build/default/production/RAM.o
+                  0x000ca6                  _RAM_init
+                  0x000ce6                  _ecritureRAM
+                  0x000db2                  _lectureRAM
+ .text            0x000e6a        0x142 build/default/production/PWM.o
+                  0x000e6a                  _calculPrescaler
+                  0x000e94                  _PWM_init
+                  0x000f32                  _PWM_rapportCyclique
+ .text            0x000fac        0x12c build/default/production/Interaction_Moteur.o
+                  0x000fac                  _Verifications
+                  0x000fb8                  _Interaction_LED
+                  0x001042                  _Interaction_Position
+                  0x001068                  _Interaction_AlarmShutdown
+ .text            0x0010d8         0xc4 build/default/production/eeprom.o
+                  0x0010d8                  _Eeprom_ReadWord
+                  0x00110c                  _Eeprom_WriteWord
+                  0x001156                  _ResetEpprom
+ .text            0x00119c         0xc4 build/default/production/Gestion_Interruption.o
+                  0x00119c                  _Interrupts_init
+                  0x0011de                  __T2Interrupt
+                  0x001218                  __T3Interrupt
+                  0x00123a                  __U1TXInterrupt
+                  0x001242                  __U1RXInterrupt
+ .text            0x001260         0x7e build/default/production/CAN10bits.o
+                  0x001260                  _CAN_init
+                  0x0012a8                  _LectureTensionMoteur
+ .text            0x0012de         0x3c build/default/production/main.o
+                  0x0012de                  _main
 
-.init.delay32     0x001232         0x1c
- .init.delay32    0x001232         0x1c g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libpic30-elf.a(delay32.eo)
-                  0x001232                  ___delay32
+.dinit            0x00131a         0x24
+ .dinit           0x00131a         0x24 data_init
 
-.dinit            0x00124e         0x1c
- .dinit           0x00124e         0x1c data_init
+.init.delay32     0x00133e         0x1c
+ .init.delay32    0x00133e         0x1c g:/program files (x86)/microchip/xc16/v1.25/bin/bin/../../lib\libpic30-elf.a(delay32.eo)
+                  0x00133e                  ___delay32
 
-_030D1240569b9bd8
+_02F7B2A056a52c94
                     0xfc00          0x2 load address 0x7ffc00  
- _030D1240569b9bd8
+ _02F7B2A056a52c94
                     0xfc00          0x2 build/default/production/eeprom.o
                     0xfc00                  _dat

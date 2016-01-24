@@ -8,6 +8,7 @@ void Verifications()
 {
     calculErreur(RESET_ERR);    //Reset les erreurs
     
+    Verif_Tension();
     //Mettre les vérifs de voltage/courant et autre...
 }
 

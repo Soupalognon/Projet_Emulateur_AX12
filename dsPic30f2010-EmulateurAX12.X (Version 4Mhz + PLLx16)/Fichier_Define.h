@@ -93,6 +93,8 @@ extern "C" {
     #define Prescaler_PWM 50
     #define Periode_PWM 51
     #define Rapport_Cyclique_PWM 52
+    #define TensionMax 53
+    #define TensionMin 54
     
     
 #ifdef	__cplusplus
