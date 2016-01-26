@@ -11,3 +11,4 @@ void Interaction_LED();
 void Interaction_Position();
 void Interaction_AlarmShutdown();
 void Verifications();
+void Verif_CourantTension();

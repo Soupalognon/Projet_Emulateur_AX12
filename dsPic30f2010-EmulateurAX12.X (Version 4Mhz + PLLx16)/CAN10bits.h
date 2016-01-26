@@ -15,7 +15,7 @@ extern "C" {
 #include "Include_Library.h"
     
     void CAN_init();
-    unsigned int LectureTensionMoteur();
+    float LectureTensionMoteur();
 
 
 #ifdef	__cplusplus

@@ -18,6 +18,7 @@ extern "C" {
     void PWM_init();
     void PWM_rapportCyclique(unsigned int rapport);
     void PWM_periode(unsigned int PtmrPrescaler, unsigned int periode);
+    void PWM_Position();
 
 #ifdef	__cplusplus
 }

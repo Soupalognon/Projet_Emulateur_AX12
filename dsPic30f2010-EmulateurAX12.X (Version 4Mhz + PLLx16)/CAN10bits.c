@@ -27,13 +27,13 @@ void CAN_init()
     //IFS0bits.ADIF = 0; //Reset du Flag CAN
 }
 
-unsigned int LectureTensionMoteur()
+float LectureTensionMoteur()
 {
-    ADCON1bits.SAMP = 1;
+    LancerCAN = 1;
     
-    while(!ADCON1bits.DONE);
+    while(!FinConversionCAN);
     
-    float Tension = 3.3 * ADCBUF0 / 1024.0;
+    float Tension = 3.3 * BufferCAN / 1024.0;
     Tension *= 7.3;  //(63000+10000)/10000   ou (R1+R2)/R2
     
     return Tension;

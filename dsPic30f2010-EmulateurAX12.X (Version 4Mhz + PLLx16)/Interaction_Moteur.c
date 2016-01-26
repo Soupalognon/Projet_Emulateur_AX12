@@ -3,15 +3,54 @@
 #include "eeprom.h"
 #include "Gestion_UART.h"
 #include "PWM.h"
+#include "CAN10bits.h"
+
 
 void Verifications()
 {
     calculErreur(RESET_ERR);    //Reset les erreurs
     
-    Verif_Tension();
+    Verif_CourantTension();
     //Mettre les vérifs de voltage/courant et autre...
 }
 
+void Verif_CourantTension()
+{
+    float Tension = LectureTensionMoteur();
+    float Courant = Tension / 1000; //Il y a une resistance de 1k après la lecture CAN =>  U=RI
+    
+    ecritureRAM(Voltage, Tension);  //Actualise les valeur de V et I
+    ecritureRAM(Current, Courant);
+    
+    if(Tension > lectureRAM(TensionMax))
+    {
+        calculErreur(VOLT_ERR);
+    }
+    else if(Tension < lectureRAM(TensionMin))
+    {
+        calculErreur(VOLT_ERR);
+    }
+    
+    if(Courant > lectureRAM(CourantMax))
+    {
+        calculErreur(CURRENT_ERR);
+    }
+}
+
+void Interaction_Position()
+{
+    if(lectureRAM(Couple) == Activer)   //Si le couple est activé
+    {
+        //Alors on controle ici le moteur
+        PWM_Position();
+        PWM = Activer;
+        while(PWM == Desactiver); //Attend que la PWM soit activé
+    }
+    else
+    {
+        PWM = Desactiver;
+    }
+}
 
 void Interaction_LED()
 {
@@ -27,7 +66,7 @@ void Interaction_LED()
     if((tempAlarmLED & 1) == 1)      //Si on active Input Voltage error
     {
         if((erreur & 1) == 1)   //Alors lancer Timer pour faie clignoter la led
-            Avertissement_LED = 1;  //Active le bip de la LED   
+            Avertissement_LED = Allumer;  //Active le bip de la LED   
     }
     if((tempAlarmLED & 2) == 2)      //Si on active Angle limit error
     {
@@ -61,55 +100,39 @@ void Interaction_LED()
     }
 }
 
-
-void Interaction_Position()
-{
-    if(lectureRAM(Couple) == Activer)   //Si le couple est activé
-    {
-        //Alors on controle ici le moteur
-        PWM_rapportCyclique(lectureRAM(Rapport_Cyclique_PWM));
-        PWM = Activer;
-        while(PWM == Desactiver); //Attend que la PWM soit activé
-    }
-    else
-    {
-        PWM = Desactiver;
-    }
-}
-
 void Interaction_AlarmShutdown()
 {
-    unsigned short tempAlarmShutdown = Eeprom_ReadWord(Alarm_Shutdown);      //18--> Registre Alarme Shutdown
+    unsigned short RegistreAlarmShutdown = Eeprom_ReadWord(Alarm_Shutdown);      //18--> Registre Alarme Shutdown
     unsigned short erreur = get_Erreur();
     
-    if((tempAlarmShutdown & 1) == 1)      //Si on active Input Voltage error
+    if((RegistreAlarmShutdown & 1) == 1)      //Si on active Input Voltage error
     {
         if((erreur & 1) == 1)
             ecritureRAM(Couple, Desactiver); //Alors on coupe la stifness
     }
-    if((tempAlarmShutdown & 2) == 2)      //Si on active Angle limit error
+    if((RegistreAlarmShutdown & 2) == 2)      //Si on active Angle limit error
     {
-        //ecritureRAM(24, 0); //Alors on coupe la stifness
+        //ecritureRAM(Couple, 0); //Alors on coupe la stifness
     }
-    if((tempAlarmShutdown & 4) == 4)      //Si on active Overheating error
+    if((RegistreAlarmShutdown & 4) == 4)      //Si on active Overheating error
     {
         if((erreur & 2) == 2)
             ecritureRAM(Couple, Desactiver); //Alors on coupe la stifness
     }
-    if((tempAlarmShutdown & 8) == 8)      //Si on active Range error
+    if((RegistreAlarmShutdown & 8) == 8)      //Si on active Range error
     {
-        //ecritureRAM(24, 0); //Alors on coupe la stifness
+        //ecritureRAM(Couple, 0); //Alors on coupe la stifness
     }
-    if((tempAlarmShutdown & 16) == 16)      //Si on active CheckSum error
+    if((RegistreAlarmShutdown & 16) == 16)      //Si on active CheckSum error
     {
         if((erreur & 16) == 16)
             ecritureRAM(Couple, Desactiver); //Alors on coupe la stifness
     }
-    if((tempAlarmShutdown & 32) == 32)      //Si on active Overload error
+    if((RegistreAlarmShutdown & 32) == 32)      //Si on active Overload error
     {
-        //ecritureRAM(24, 0); //Alors on coupe la stifness
+        //ecritureRAM(Couple, 0); //Alors on coupe la stifness
     }
-    if((tempAlarmShutdown & 64) == 64)      //Si on active Instruction error
+    if((RegistreAlarmShutdown & 64) == 64)      //Si on active Instruction error
     {
         if((erreur & 64) == 64)
             ecritureRAM(Couple, Desactiver); //Alors on coupe la stifness

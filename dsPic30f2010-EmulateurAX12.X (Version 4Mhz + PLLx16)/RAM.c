@@ -25,6 +25,9 @@ unsigned short _RapportCycliquePWM;
 
 float _TensionMax;   //En Volt
 float _TensionMin;
+float _CourantMax;
+
+unsigned int _AngleMax;
 
 
 void RAM_init()
@@ -43,11 +46,13 @@ void RAM_init()
     _GPH = _PPH;
     
     _PrescalerPWM = 16;
-    _PeriodePWM = 2;
+    _PeriodePWM = 20;
     _RapportCycliquePWM = 25;
     
     _TensionMax = 9.6;
     _TensionMin = 9.6;
+    
+    _AngleMax = 300; //En degrés
 }
 
 
@@ -100,7 +105,12 @@ void ecritureRAM(unsigned short adresse, unsigned short value)
         case 54:
             _TensionMin = value;
             break;
-            
+        case 55:
+            _CourantMax = value;
+            break;
+        case 56:
+            _AngleMax = value;
+            break;
         default:
             break;
     }
@@ -167,6 +177,12 @@ unsigned short lectureRAM(unsigned short adresse)
             break;
         case 54:
             return _TensionMin;
+            break;
+        case 55:
+            return _CourantMax;
+            break;
+        case 56:
+            return _AngleMax;
             break;
             
         default:        //Ecrire l'erreur ICI

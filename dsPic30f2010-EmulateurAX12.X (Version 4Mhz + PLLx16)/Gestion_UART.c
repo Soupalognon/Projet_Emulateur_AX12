@@ -191,7 +191,7 @@ void calculErreur(int tempErreur)
         Erreur |= 1 << 6;
     if(tempErreur == CHECKSUM_ERR)
         Erreur |= 1 << 4;
-    if(tempErreur == TEMP_ERR)    //Signigfie que le moteur est trop chaud/froid
+    if(tempErreur == CURRENT_ERR)    //Signigfie que le moteur est trop chaud/froid
         Erreur |= 1 << 2;
     if(tempErreur == VOLT_ERR)    //Signifie erreur de sur/sous voltage
         Erreur |= 1 << 0;
@@ -365,21 +365,5 @@ void analyseTrame()
         //Alors l'ID n'est pas le bon. On ne lit pas l'information
     {
         //PORTBbits.RB0 = 0;
-    }
-}
-
-void Verif_Tension()
-{
-    unsigned int Tension = LectureTensionMoteur();
-    
-    ecritureRAM(Voltage, Tension);
-    
-    if(Tension > lectureRAM(TensionMax))
-    {
-        calculErreur(VOLT_ERR);
-    }
-    else if(Tension < lectureRAM(TensionMin))
-    {
-        calculErreur(VOLT_ERR);
     }
 }

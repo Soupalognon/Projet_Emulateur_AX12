@@ -10,7 +10,7 @@
  * Pas de gestion des RANGE ERROR (p.12 datasheet AX12)
  * Pas de gestion des ANGLE LIMIT ERROR
  * Pas de gestion des OVERLOAD ERROR
- * Continuer fonction calculErreur quand on connaitra la fonction calcul Voltage et température
+ * Continuer fonction calculErreur quand on connaitra la fonction calcul Voltage et température (au lieu de temp mettre courant)
  * Definir toutes les fonctions utilisés seulement dans LE MEME fichier comme "static" 
  * Faire SYNC_WRITE dans la fonction lectureTrame 
  * Chercher un moyen d'utiliser le "DMA".   Sert à éviter d'ecrire directement dans l'eeprom car c'est très long
@@ -48,15 +48,19 @@ particular case.
 
 int main(int argc, char** argv) 
 {
-    //A enlever!!!
+    //Reset le baud Rate à chaque televersement du pic
     Eeprom_WriteWord(Baud, Baud_9600);  //Baud Rate
     //
     TRISB = Sortie;
     TRISD = Sortie;
+    
+    Interrupts_init();
+    
     Avertissement_LED = Activer;  //Fait clignoter la led 2 fois au démarrage
+    while(Avertissement_LED == Activer);
     
     UART_init();
-    Interrupts_init();
+    
     RAM_init();
     PWM_init();   //Prescaleur 1:16   // Periode à 2ms
     CAN_init();

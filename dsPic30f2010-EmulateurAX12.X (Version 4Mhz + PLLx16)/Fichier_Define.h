@@ -55,7 +55,7 @@ extern "C" {
     #define SYNC_WRITE 0x83
 
     #define INST_ERR 0
-    #define TEMP_ERR 1
+    #define CURRENT_ERR 1
     #define VOLT_ERR 2
     #define CHECKSUM_ERR 3
     #define RESET_ERR 255
@@ -85,17 +85,25 @@ extern "C" {
     #define Position_Actuelle_L 36
     #define Position_Actuelle_H 37
     #define Voltage 42
-    #define Temperature 43
+    #define Current 43
     #define Registre_Instruction 44
     #define Lock 47
     #define Punch_L 48
     #define Punch_H 49
+                        //Supplémentaires
     #define Prescaler_PWM 50
     #define Periode_PWM 51
     #define Rapport_Cyclique_PWM 52
     #define TensionMax 53
     #define TensionMin 54
+    #define CourantMax 55
+    #define AngleMax 56
     
+    
+    //CAN10bits
+    #define BufferCAN ADCBUF0
+    #define FinConversionCAN ADCON1bits.DONE
+    #define LancerCAN ADCON1bits.SAMP
     
 #ifdef	__cplusplus
 }

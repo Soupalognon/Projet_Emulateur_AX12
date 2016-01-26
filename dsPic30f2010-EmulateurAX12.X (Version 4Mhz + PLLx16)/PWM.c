@@ -75,12 +75,29 @@ void PWM_init()
 void PWM_rapportCyclique(unsigned int rapport)
 {
     float Periode = lectureRAM(Periode_PWM); 
-    Periode /= 1000;    //On doit passer de sec à msec
+    Periode /= 1000;    //On doit passer en msec
     unsigned short Prescaler = lectureRAM(Prescaler_PWM);
     
-    unsigned long temp = 2*(FCY * Periode / Prescaler);
-    temp *= rapport;
-    temp /= 100U;    //Passe d'un pourcentage à un nombre entre 0 et 1
+    unsigned long temp = 2*(FCY * Periode / Prescaler); //On mets la valeur maximum
+    temp *= rapport;    //On réduit au rapport voulu
+    temp /= 100U;       //Rajout la division par 100 au rapport demandé
+    PDC1 = temp;    //Configure le rapport cyclique
+    //PDC1 max = 2*PTPER
+}
+
+void PWM_Position()
+{
+    unsigned int _AngleMax = lectureRAM(AngleMax);
+    float Periode = lectureRAM(Periode_PWM); 
+    Periode /= 1000;    //On doit passer en msec
+    unsigned short Prescaler = lectureRAM(Prescaler_PWM);
+    unsigned int Position_Desirer = lectureRAM(Position_Desirer_L) << 8;    //on recupère la position désiré sur 16bits
+    Position_Desirer |= lectureRAM(Position_Desirer_H);
+    float rapport = 1 + (Position_Desirer / _AngleMax);    //Calcul du temps sur une base de 2ms => 300° ; 1ms => 0°
+    rapport /= 20;      //On divise par la periode pour le rapport Cyclique
+    
+    unsigned long temp = 2*(FCY * Periode / Prescaler); //On mets la valeur maximum
+    temp *= rapport;    //On réduit au rapport voulu
     PDC1 = temp;    //Configure le rapport cyclique
     //PDC1 max = 2*PTPER
 }
