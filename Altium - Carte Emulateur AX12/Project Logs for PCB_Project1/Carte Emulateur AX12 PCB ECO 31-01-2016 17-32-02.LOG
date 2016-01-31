@@ -1,0 +1,23 @@
+Removed Pin From Net: NetName=NetC2_1 Pin=P1-2
+Removed Pin From Net: NetName=GND Pin=P1-3
+Removed Pin From Net: NetName=NetJ1_3 Pin=R7-1
+Removed Pin From Net: NetName=NetC2_1 Pin=R7-2
+Change Component Footprint: Designator=P1 Old Footprint=HDR1X6H New Footprint=690367280676
+Added Component: Designator=R8(0805)
+Added Pin To Net: NetName=GND Pin=P1-4
+Added Pin To Net: NetName=NetC2_1 Pin=P1-5
+Added Pin To Net: NetName=GND Pin=R7-1
+Added Pin To Net: NetName=NetC6_2 Pin=R7-2
+Added Pin To Net: NetName=NetJ1_3 Pin=R7-1
+Added Pin To Net: NetName=NetC2_1 Pin=R7-2
+Added Pin To Net: NetName=NetP1_2 Pin=P1-2
+Added Pin To Net: NetName=NetP1_2 Pin=U1-18
+Added Net: Name=NetP1_2
+Added Pin To Net: NetName=NetP1_3 Pin=P1-3
+Added Pin To Net: NetName=NetP1_3 Pin=U1-17
+Added Net: Name=NetP1_3
+Added Pin To Net: NetName=NetP1_6 Pin=P1-6
+Added Pin To Net: NetName=NetP1_6 Pin=U1-1
+Added Net: Name=NetP1_6
+Added Member To Class: ClassName=Carte Emulateur AX12 Member=Component R8 Res1
+Added Room: Name=Carte Emulateur AX12
