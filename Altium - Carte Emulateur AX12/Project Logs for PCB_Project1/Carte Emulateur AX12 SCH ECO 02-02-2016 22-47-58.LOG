@@ -1,0 +1,6 @@
+Change Component Designator: OldDesignator=J4 NewDesignator=tx
+Change Component Designator: OldDesignator=J5 NewDesignator=rx
+Change Component Designator: OldDesignator=P1 NewDesignator=PROG
+Change Component Designator: OldDesignator=P2 NewDesignator=IN
+Change Component Designator: OldDesignator=P3 NewDesignator=OUT
+Change Component Designator: OldDesignator=P4 NewDesignator=PWM
