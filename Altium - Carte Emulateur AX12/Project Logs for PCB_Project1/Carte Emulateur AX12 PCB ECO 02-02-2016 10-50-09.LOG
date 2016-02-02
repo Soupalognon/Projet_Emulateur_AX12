@@ -1,0 +1,9 @@
+Added Component: Designator=R3(L1W-2512)
+Added Component: Designator=U2(MP04A_N)
+Added Pin To Net: NetName=NetP4_2 Pin=R3-1
+Added Pin To Net: NetName=GND Pin=R3-2
+Added Pin To Net: NetName=GND Pin=U2-1
+Added Pin To Net: NetName=NetC2_1 Pin=U2-2
+Added Pin To Net: NetName=NetC1_1 Pin=U2-3
+Added Member To Class: ClassName=Carte Emulateur AX12 Member=Component R3 Res1
+Added Member To Class: ClassName=Carte Emulateur AX12 Member=Component U2 LM1117MP-3.3

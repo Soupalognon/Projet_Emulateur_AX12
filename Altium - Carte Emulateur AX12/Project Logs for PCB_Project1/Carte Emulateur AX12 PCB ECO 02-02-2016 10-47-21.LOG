@@ -1,0 +1,20 @@
+Added Component: Designator=U1(SOIC-SO28_M)
+Added Component: Designator=U2(MP04A_N)
+Added Pin To Net: NetName=NetP1_6 Pin=U1-1
+Added Pin To Net: NetName=NetD1_1 Pin=U1-2
+Added Pin To Net: NetName=NetC5_2 Pin=U1-3
+Added Pin To Net: NetName=GND Pin=U1-8
+Added Pin To Net: NetName=NetK1_3 Pin=U1-9
+Added Pin To Net: NetName=NetJ4_2 Pin=U1-11
+Added Pin To Net: NetName=NetJ5_4 Pin=U1-12
+Added Pin To Net: NetName=NetC2_1 Pin=U1-13
+Added Pin To Net: NetName=NetJ5_1 Pin=U1-14
+Added Pin To Net: NetName=NetJ4_1 Pin=U1-15
+Added Pin To Net: NetName=NetP1_3 Pin=U1-17
+Added Pin To Net: NetName=NetP1_2 Pin=U1-18
+Added Pin To Net: NetName=GND Pin=U1-19
+Added Pin To Net: NetName=NetC2_1 Pin=U1-20
+Added Pin To Net: NetName=NetP4_3 Pin=U1-25
+Added Pin To Net: NetName=GND Pin=U1-27
+Added Pin To Net: NetName=NetC2_1 Pin=U1-28
+Added Member To Class: ClassName=Carte Emulateur AX12 Member=Component U1 DSPIC30F2010-30I/SO
