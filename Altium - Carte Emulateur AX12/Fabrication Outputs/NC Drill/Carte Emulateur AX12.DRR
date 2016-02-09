@@ -1,0 +1,16 @@
+---------------------------------------------------------------------------
+NCDrill File Report For: Carte Emulateur AX12.PcbDoc   09/02/2016  20:25:56
+---------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : Carte Emulateur AX12.TXT
+
+Tool         Hole Size           Hole Type     Hole Count Plated       Tool Travel
+---------------------------------------------------------------------------
+T1        28mil (0.7112mm)         Round          17               3.93 Inch (99.78 mm)
+T2        30mil (0.762mm)          Round          9                1.52 Inch (38.70 mm)
+T3        35.4mil (0.89916mm)      Round          7                0.90 Inch (22.90 mm)
+---------------------------------------------------------------------------
+Totals                                            33               6.35 Inch (161.38 mm)
+
+Total Processing Time (hh:mm:ss) : 00:00:00

@@ -1,0 +1,10 @@
+Output: Design Rules Check
+Type  : DRC
+From  : PCB Document [Carte Emulateur AX12 - Version Double.PcbDoc]
+   Generated File[Carte Emulateur AX12 - Version Double.html]
+
+
+Files Generated   : 1
+Documents Printed : 0
+
+Finished Output Generation At 00:19:40 On 10/02/2016

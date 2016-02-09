@@ -1,0 +1,414 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+        h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+            padding: 0.3em;
+        }
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+        body {
+			font-family : segoe ui;
+        }
+
+        td, th {
+            padding: 0.5em;
+			text-align : left;
+			width: 10em;
+        }
+        th {
+			background-color : #EEEEEE;
+
+        }
+        th.column1, td.column1 {
+            text-align: left;
+            width : auto;
+        }
+        table {
+            width : 100%;
+			font-size: 0.9em;
+        }
+        
+        .DRC_summary_header {                           
+            padding-bottom : 0.1em;
+            border : 0px solid black;                           
+            width: 100%;
+			align: left;
+        }
+
+        .DRC_summary_header_col1, 
+        .DRC_summary_header_col2, 
+        .DRC_summary_header_col3  {
+            color : black;
+            font-size:100%;
+                        padding : 0em;
+            padding-top : 0.2em;
+            padding-bottom 0.2em;
+            border : 0px solid black;
+            vertical-align: top;
+			text-align: left;
+        }
+        
+        .DRC_summary_header_col1 {                              
+			font-weight: bold;
+			width: 8em;
+        }
+
+        .DRC_summary_header_col2 {       
+			width: 0.1em;
+		
+        }
+
+        .DRC_summary_header_col3 {       
+			width : auto;
+        }
+
+        .header_holder  {
+        Width = 100%;
+        border = 0px solid green;
+        padding = 0;
+        }
+        
+        
+        .front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+                {
+            left:0;
+            top:0;
+			padding: 0em;
+            padding-top : 0.1em;            
+            border : 0px solid black;
+            width : 100%;
+            vertical-align: top;
+            text-align: left;
+        }
+
+        .front_matter_column1 {
+            width : 8em;   
+			font-weight: bold;
+        }
+        
+        .front_matter_column2 {
+            width: 0.1em;
+        }
+
+        .front_matter_column3 {
+            width         : auto;  
+        }
+        
+        .total_column1, .total_column {
+            font-weight : bold;
+        }
+        .total_column1 {
+			text-align : left;
+        }
+        .warning, .error {
+            color : red;
+            font-weight : bold;
+        }
+        tr.onmouseout_odd {
+			background-color : #white;
+        }
+        tr.onmouseout_even { 
+			background-color : #FAFAFA;
+        }
+        tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+        } 
+        a:link, a:visited, .q a:link,.q a:active,.q {
+            color: #21489e; 
+        }
+        a:link.callback, a:visited.callback { 
+            color: #21489e; 
+        }
+        p.contents_level1 {
+            font-weight : bold;
+            font-size : 110%;
+            margin : 0.5em;
+        }
+        p.contents_level2 {
+            position : relative;
+            left : 20px;
+            margin : 0.5em;
+        }
+    </style><script type="text/javascript">
+        function coordToMils(coord) {
+            var number = coord / 10000;
+            
+            if (number != number.toFixed(3))
+                number = number.toFixed(3);
+
+            return number + 'mil'
+        }
+
+        function coordToMM(coord) {
+            var number = 0.0254 * coord / 10000;
+            
+            if (number != number.toFixed(4))
+                number = number.toFixed(4);
+            
+            return number + 'mm'
+        }
+    
+        function convertCoord(coordNode, units) {
+            for (var i = 0; i < coordNode.childNodes.length; i++) {
+                coordNode.removeChild(coordNode.childNodes[i]);
+            }
+
+            var coord = coordNode.getAttribute('value');
+            if (coord != null) {
+                if (units == 'mm') {
+                    textNode = document.createTextNode(coordToMM(coord));
+                    coordNode.appendChild(textNode);
+                } else if (units == 'mil') {
+                    textNode = document.createTextNode(coordToMils(coord));     
+                    coordNode.appendChild(textNode);    
+                }
+            }
+        }
+    
+        function convertUnits(unitNode, units) {
+            for (var i = 0; i < unitNode.childNodes.length; i++) {
+                unitNode.removeChild(unitNode.childNodes[i]);       
+            }
+        
+            textNode = document.createTextNode(units); 
+            unitNode.appendChild(textNode);
+        }
+    
+        function changeUnits(radio_input, units) {
+            if (radio_input.checked) {
+            
+                var elements = document.getElementsByName('coordinate');
+                if (elements) {
+                    for (var i = 0; i < elements.length; i++) {
+                        convertCoord(elements[i], units);
+                    }
+                }
+    
+                var elements = document.getElementsByName('units');
+                if (elements) {
+                    for (var i = 0; i < elements.length; i++) {
+                        convertUnits(elements[i], units);
+                    }
+                }
+            }
+        }
+    </script></head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Program Files (x86)\Altium 2015\Templates\AD_logo.png
+        "><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">09/02/2016</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">20:25:59</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc" class="file"><acronym title="C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc">C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">22</td></tr>
+</table>
+</td>
+</table><a name="IDDUJXTI04UBSYOKXKDVGV3KIDHDGVSRVF2YZEGAH2EUAIR5U3SVND"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID1YSPRIN2M2RDLSH1TP0JQ3NO0LPCJQVM15IAL4LHYOOZDETWTNUP">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDLAQ21ZJQCLXALXYLQ44MMJKKLMUGZB3M53BCSDKVLFHPYVHW1WPC">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDJX445YABKZLVMH44XZXXKCVHMBXOFJIMFFL4VQKWDML0R2LMW55">Clearance Constraint (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">22</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDKSKULYDLPRUIG5RAVC2TMWIW3KUOUDZ4SUD0JGCCX5GTXBLUNLZF">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID02SH3RGEGGBZECZXSZXU0S4MIBCMY4GLFBM0DZKTYW3VL50OH2TB">Width Constraint (Min=0.254mm) (Max=0.254mm) (Preferred=0.254mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDWBBME141NKAIFYM5RTP1EXTZABOGSR030RGUNGM4CN3OOTZYJETD">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDKLCYTAIRGB5KKCQIDEZJEJIMXCOWEH1B5EHALMMLMIOKZ4UXHDAD">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDQN002EAT0WXDBRUP5CV5OFKSVGGVWKVBPAP34XLJUOG0H1QDUUAI">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDO5U4DRWVBPD2FOZV4EACDWE2ABPNXJDUPGWLJHJX233H4H3V1ADP">Minimum Solder Mask Sliver (Gap=0.15mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID2GZCJA5ZV5XGMOWQUYJW4PFDRHXXJXPGX21OZOHAD3MT3TRB2JXB">Silk To Solder Mask (Clearance=0.15mm) (IsPad),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDJXHSQWETNAQPHSQ3GFFQ35JPUJEEQDFOP5I20ZMQKZXDD3TCVIWJ">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDIT2FAQFOCZGPGFO5B4I2GRPSBA5FQZQDEWCRKDII2DBHJCQT4QE">Silk primitive without silk layer</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDVZS5WQFKBQW5PCIIDYG1F2OHBMPRZIINTIPYTDJC3SUYUV5F2HP">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDE00CNXD5BZYQBJGPLUDUKI2YBSDMKS1TK550PCJNWFQCEONYGNJ">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">22</td>
+</tr>
+</table><br><a name="IDJX445YABKZLVMH44XZXXKCVHMBXOFJIMFFL4VQKWDML0R2LMW55"><table>
+<tr>
+<th style="text-align : left" colspan="2" class="rule">Clearance Constraint (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True">Track (0mm,0mm)(50mm,0mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1470.409mil|Location2.X=1537.465mil|Location1.Y=979.268mil|Location2.Y=1038.449mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1470.409mil|Location2.X=1537.465mil|Location1.Y=979.268mil|Location2.Y=1038.449mil|Absolute=True">Pad R1-1(12.3mm,0.9mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True">Track (0mm,0mm)(50mm,0mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1548.165mil|Location2.X=1615.22mil|Location1.Y=979.268mil|Location2.Y=1038.449mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1548.165mil|Location2.X=1615.22mil|Location1.Y=979.268mil|Location2.Y=1038.449mil|Absolute=True">Pad D1-2(14.275mm,0.9mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True">Track (0mm,0mm)(50mm,0mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1674.134mil|Location2.X=1832.756mil|Location1.Y=986.142mil|Location2.Y=996.142mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1674.134mil|Location2.X=1832.756mil|Location1.Y=986.142mil|Location2.Y=996.142mil|Absolute=True">Track (16.75mm,0.45mm)(20.525mm,0.45mm)  Bottom Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True">Track (0mm,0mm)(50mm,0mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1647.59mil|Location2.X=1684.134mil|Location1.Y=986.142mil|Location2.Y=1022.686mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1647.59mil|Location2.X=1684.134mil|Location1.Y=986.142mil|Location2.Y=1022.686mil|Absolute=True">Track (16.076mm,1.124mm)(16.75mm,0.45mm)  Bottom Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True">Track (0mm,0mm)(50mm,0mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1822.756mil|Location2.X=1860.709mil|Location1.Y=986.142mil|Location2.Y=1024.094mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1822.756mil|Location2.X=1860.709mil|Location1.Y=986.142mil|Location2.Y=1024.094mil|Absolute=True">Track (20.525mm,0.45mm)(21.235mm,1.16mm)  Bottom Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True">Track (0mm,0mm)(50mm,0mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2338.504mil|Location2.X=2361.364mil|Location1.Y=986.142mil|Location2.Y=1009.002mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2338.504mil|Location2.X=2361.364mil|Location1.Y=986.142mil|Location2.Y=1009.002mil|Absolute=True">Track (33.625mm,0.45mm)(33.952mm,0.777mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True">Track (0mm,0mm)(50mm,0mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1670.741mil|Location2.X=2348.504mil|Location1.Y=986.142mil|Location2.Y=996.142mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1670.741mil|Location2.X=2348.504mil|Location1.Y=986.142mil|Location2.Y=996.142mil|Absolute=True">Track (16.664mm,0.45mm)(33.625mm,0.45mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True">Track (0mm,0mm)(50mm,0mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1578.221mil|Location2.X=1680.741mil|Location1.Y=986.142mil|Location2.Y=1088.661mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1578.221mil|Location2.X=1680.741mil|Location1.Y=986.142mil|Location2.Y=1088.661mil|Absolute=True">Track (14.314mm,2.8mm)(16.664mm,0.45mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1019.685mil|Location2.X=2988.189mil|Location1.Y=973.425mil|Location2.Y=1760.827mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1019.685mil|Location2.X=2988.189mil|Location1.Y=973.425mil|Location2.Y=1760.827mil|Absolute=True">Polygon Region (49 hole(s)) Top Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=1024.685mil|Location1.Y=968.425mil|Location2.Y=1765.827mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=1024.685mil|Location1.Y=968.425mil|Location2.Y=1765.827mil|Absolute=True">Track (0mm,0mm)(0mm,20mm)  Keep-Out Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1019.685mil|Location2.X=2988.189mil|Location1.Y=973.425mil|Location2.Y=1760.827mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1019.685mil|Location2.X=2988.189mil|Location1.Y=973.425mil|Location2.Y=1760.827mil|Absolute=True">Polygon Region (38 hole(s)) Bottom Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=1024.685mil|Location1.Y=968.425mil|Location2.Y=1765.827mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=1024.685mil|Location1.Y=968.425mil|Location2.Y=1765.827mil|Absolute=True">Track (0mm,0mm)(0mm,20mm)  Keep-Out Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1019.685mil|Location2.X=2988.189mil|Location1.Y=973.425mil|Location2.Y=1760.827mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1019.685mil|Location2.X=2988.189mil|Location1.Y=973.425mil|Location2.Y=1760.827mil|Absolute=True">Polygon Region (49 hole(s)) Top Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=1755.827mil|Location2.Y=1765.827mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=1755.827mil|Location2.Y=1765.827mil|Absolute=True">Track (0mm,20mm)(50mm,20mm)  Keep-Out Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1019.685mil|Location2.X=2988.189mil|Location1.Y=973.425mil|Location2.Y=1760.827mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1019.685mil|Location2.X=2988.189mil|Location1.Y=973.425mil|Location2.Y=1760.827mil|Absolute=True">Polygon Region (38 hole(s)) Bottom Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=1755.827mil|Location2.Y=1765.827mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=1755.827mil|Location2.Y=1765.827mil|Absolute=True">Track (0mm,20mm)(50mm,20mm)  Keep-Out Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1019.685mil|Location2.X=2988.189mil|Location1.Y=973.425mil|Location2.Y=1760.827mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1019.685mil|Location2.X=2988.189mil|Location1.Y=973.425mil|Location2.Y=1760.827mil|Absolute=True">Polygon Region (49 hole(s)) Top Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2983.189mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=1765.827mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2983.189mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=1765.827mil|Absolute=True">Track (50mm,0mm)(50mm,20mm)  Keep-Out Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1019.685mil|Location2.X=2988.189mil|Location1.Y=973.425mil|Location2.Y=1760.827mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1019.685mil|Location2.X=2988.189mil|Location1.Y=973.425mil|Location2.Y=1760.827mil|Absolute=True">Polygon Region (38 hole(s)) Bottom Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2983.189mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=1765.827mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2983.189mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=1765.827mil|Absolute=True">Track (50mm,0mm)(50mm,20mm)  Keep-Out Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2338.504mil|Location2.X=2361.364mil|Location1.Y=986.142mil|Location2.Y=1009.002mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2338.504mil|Location2.X=2361.364mil|Location1.Y=986.142mil|Location2.Y=1009.002mil|Absolute=True">Track (33.625mm,0.45mm)(33.952mm,0.777mm)  Top Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True">Track (0mm,0mm)(50mm,0mm)  Keep-Out Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1670.741mil|Location2.X=2348.504mil|Location1.Y=986.142mil|Location2.Y=996.142mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1670.741mil|Location2.X=2348.504mil|Location1.Y=986.142mil|Location2.Y=996.142mil|Absolute=True">Track (16.664mm,0.45mm)(33.625mm,0.45mm)  Top Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True">Track (0mm,0mm)(50mm,0mm)  Keep-Out Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1578.221mil|Location2.X=1680.741mil|Location1.Y=986.142mil|Location2.Y=1088.661mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1578.221mil|Location2.X=1680.741mil|Location1.Y=986.142mil|Location2.Y=1088.661mil|Absolute=True">Track (14.314mm,2.8mm)(16.664mm,0.45mm)  Top Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True">Track (0mm,0mm)(50mm,0mm)  Keep-Out Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1019.685mil|Location2.X=2988.189mil|Location1.Y=973.425mil|Location2.Y=1760.827mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1019.685mil|Location2.X=2988.189mil|Location1.Y=973.425mil|Location2.Y=1760.827mil|Absolute=True">Polygon Region (49 hole(s)) Top Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True">Track (0mm,0mm)(50mm,0mm)  Keep-Out Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1822.756mil|Location2.X=1860.709mil|Location1.Y=986.142mil|Location2.Y=1024.094mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1822.756mil|Location2.X=1860.709mil|Location1.Y=986.142mil|Location2.Y=1024.094mil|Absolute=True">Track (20.525mm,0.45mm)(21.235mm,1.16mm)  Bottom Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True">Track (0mm,0mm)(50mm,0mm)  Keep-Out Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1647.59mil|Location2.X=1684.134mil|Location1.Y=986.142mil|Location2.Y=1022.686mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1647.59mil|Location2.X=1684.134mil|Location1.Y=986.142mil|Location2.Y=1022.686mil|Absolute=True">Track (16.076mm,1.124mm)(16.75mm,0.45mm)  Bottom Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True">Track (0mm,0mm)(50mm,0mm)  Keep-Out Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1674.134mil|Location2.X=1832.756mil|Location1.Y=986.142mil|Location2.Y=996.142mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1674.134mil|Location2.X=1832.756mil|Location1.Y=986.142mil|Location2.Y=996.142mil|Absolute=True">Track (16.75mm,0.45mm)(20.525mm,0.45mm)  Bottom Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True">Track (0mm,0mm)(50mm,0mm)  Keep-Out Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1019.685mil|Location2.X=2988.189mil|Location1.Y=973.425mil|Location2.Y=1760.827mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1019.685mil|Location2.X=2988.189mil|Location1.Y=973.425mil|Location2.Y=1760.827mil|Absolute=True">Polygon Region (38 hole(s)) Bottom Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\azerty\Documents\GitHub\Projet_Emulateur_AX12\Altium - Carte Emulateur AX12\Carte Emulateur AX12.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1014.685mil|Location2.X=2993.189mil|Location1.Y=968.425mil|Location2.Y=978.425mil|Absolute=True">Track (0mm,0mm)(50mm,0mm)  Keep-Out Layer</acronym></a></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
