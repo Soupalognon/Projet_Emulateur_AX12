@@ -174,83 +174,164 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=IRYPSABU
 
+[Document9]
+DocumentPath=Standard.OutJob
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=
+
 [GeneratedDocument1]
 DocumentPath=Fabrication Outputs\BOM\Bill of Materials-PCB_Project1.xls
 DItemRevisionGUID=
 
 [GeneratedDocument2]
-DocumentPath=Fabrication Outputs\NC Drill\Carte Emulateur AX12.DRR
+DocumentPath=Fabrication Outputs\NC Drill\Carte Emulateur AX12 - Version Double.DRR
 DItemRevisionGUID=
 
 [GeneratedDocument3]
-DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.EXTREP
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12 - Version Double.EXTREP
 DItemRevisionGUID=
 
 [GeneratedDocument4]
-DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.GBL
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12 - Version Double.GBL
 DItemRevisionGUID=
 
 [GeneratedDocument5]
-DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.GBO
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12 - Version Double.GBO
 DItemRevisionGUID=
 
 [GeneratedDocument6]
-DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.GBP
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12 - Version Double.GBP
 DItemRevisionGUID=
 
 [GeneratedDocument7]
-DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.GBS
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12 - Version Double.GBS
 DItemRevisionGUID=
 
 [GeneratedDocument8]
-DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.GKO
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12 - Version Double.GKO
 DItemRevisionGUID=
 
 [GeneratedDocument9]
-DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.GTL
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12 - Version Double.GTL
 DItemRevisionGUID=
 
 [GeneratedDocument10]
-DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.GTO
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12 - Version Double.GTO
 DItemRevisionGUID=
 
 [GeneratedDocument11]
-DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.GTP
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12 - Version Double.GTP
 DItemRevisionGUID=
 
 [GeneratedDocument12]
-DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.GTS
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12 - Version Double.GTS
 DItemRevisionGUID=
 
 [GeneratedDocument13]
-DocumentPath=Fabrication Outputs\DRC\Carte Emulateur AX12.html
+DocumentPath=Fabrication Outputs\DRC\Carte Emulateur AX12 - Version Double.html
 DItemRevisionGUID=
 
 [GeneratedDocument14]
-DocumentPath=Fabrication Outputs\NC Drill\Carte Emulateur AX12.LDP
+DocumentPath=Fabrication Outputs\NC Drill\Carte Emulateur AX12 - Version Double.LDP
 DItemRevisionGUID=
 
 [GeneratedDocument15]
-DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.REP
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12 - Version Double.REP
 DItemRevisionGUID=
 
 [GeneratedDocument16]
-DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.RUL
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12 - Version Double.RUL
 DItemRevisionGUID=
 
 [GeneratedDocument17]
-DocumentPath=Fabrication Outputs\NC Drill\Carte Emulateur AX12.TXT
+DocumentPath=Fabrication Outputs\NC Drill\Carte Emulateur AX12 - Version Double.TXT
 DItemRevisionGUID=
 
 [GeneratedDocument18]
-DocumentPath=Project Outputs for PCB_Project1\Design Rule Check - Carte Emulateur AX12 - Version Double.html
+DocumentPath=Fabrication Outputs\NC Drill\Carte Emulateur AX12.DRR
 DItemRevisionGUID=
 
 [GeneratedDocument19]
-DocumentPath=Project Outputs for PCB_Project1\Design Rule Check - Carte Emulateur AX12.html
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.EXTREP
 DItemRevisionGUID=
 
 [GeneratedDocument20]
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.GBL
+DItemRevisionGUID=
+
+[GeneratedDocument21]
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.GBO
+DItemRevisionGUID=
+
+[GeneratedDocument22]
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.GBP
+DItemRevisionGUID=
+
+[GeneratedDocument23]
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.GBS
+DItemRevisionGUID=
+
+[GeneratedDocument24]
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.GKO
+DItemRevisionGUID=
+
+[GeneratedDocument25]
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.GTL
+DItemRevisionGUID=
+
+[GeneratedDocument26]
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.GTO
+DItemRevisionGUID=
+
+[GeneratedDocument27]
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.GTP
+DItemRevisionGUID=
+
+[GeneratedDocument28]
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.GTS
+DItemRevisionGUID=
+
+[GeneratedDocument29]
+DocumentPath=Fabrication Outputs\DRC\Carte Emulateur AX12.html
+DItemRevisionGUID=
+
+[GeneratedDocument30]
+DocumentPath=Fabrication Outputs\NC Drill\Carte Emulateur AX12.LDP
+DItemRevisionGUID=
+
+[GeneratedDocument31]
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.REP
+DItemRevisionGUID=
+
+[GeneratedDocument32]
+DocumentPath=Fabrication Outputs\Gerber\Carte Emulateur AX12.RUL
+DItemRevisionGUID=
+
+[GeneratedDocument33]
+DocumentPath=Fabrication Outputs\NC Drill\Carte Emulateur AX12.TXT
+DItemRevisionGUID=
+
+[GeneratedDocument34]
+DocumentPath=Project Outputs for PCB_Project1\Design Rule Check - Carte Emulateur AX12 - Version Double.html
+DItemRevisionGUID=
+
+[GeneratedDocument35]
+DocumentPath=Project Outputs for PCB_Project1\Design Rule Check - Carte Emulateur AX12.html
+DItemRevisionGUID=
+
+[GeneratedDocument36]
 DocumentPath=Project Outputs for PCB_Project1\Design Rule Check - PCB2.html
 DItemRevisionGUID=
 
