@@ -3,14 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/user/Documents/GitHub/Projet_Emulateur_AX12/dsPic30f2010-EmulateurAX12.X%20(Version%204Mhz%20+%20PLLx16)/PWM.h</file>
-            <file>file:/C:/Users/user/Documents/GitHub/Projet_Emulateur_AX12/dsPic30f2010-EmulateurAX12.X%20(Version%204Mhz%20+%20PLLx16)/Fichier_Define.h</file>
-            <file>file:/C:/Users/user/Documents/GitHub/Projet_Emulateur_AX12/dsPic30f2010-EmulateurAX12.X%20(Version%204Mhz%20+%20PLLx16)/RAM.c</file>
-            <file>file:/C:/Users/user/Documents/GitHub/Projet_Emulateur_AX12/dsPic30f2010-EmulateurAX12.X%20(Version%204Mhz%20+%20PLLx16)/main.c</file>
-            <file>file:/C:/Users/user/Documents/GitHub/Projet_Emulateur_AX12/dsPic30f2010-EmulateurAX12.X%20(Version%204Mhz%20+%20PLLx16)/Interaction_Moteur.c</file>
-            <file>file:/C:/Users/user/Documents/GitHub/Projet_Emulateur_AX12/dsPic30f2010-EmulateurAX12.X%20(Version%204Mhz%20+%20PLLx16)/Gestion_Interruption.c</file>
-            <file>file:/C:/Users/user/Documents/GitHub/Projet_Emulateur_AX12/dsPic30f2010-EmulateurAX12.X%20(Version%204Mhz%20+%20PLLx16)/Interaction_Moteur.h</file>
-            <file>file:/C:/Users/user/Documents/GitHub/Projet_Emulateur_AX12/dsPic30f2010-EmulateurAX12.X%20(Version%204Mhz%20+%20PLLx16)/PWM.c</file>
+            <file>file:/C:/Users/azerty/Documents/GitHub/Projet_Emulateur_AX12/dsPic30f2010-EmulateurAX12.X%20(Version%204Mhz%20+%20PLLx16)/main.c</file>
+            <file>file:/C:/Users/azerty/Documents/GitHub/Projet_Emulateur_AX12/dsPic30f2010-EmulateurAX12.X%20(Version%204Mhz%20+%20PLLx16)/Interaction_Moteur.c</file>
+            <file>file:/C:/Users/azerty/Documents/GitHub/Projet_Emulateur_AX12/dsPic30f2010-EmulateurAX12.X%20(Version%204Mhz%20+%20PLLx16)/RAM.h</file>
+            <file>file:/C:/Users/azerty/Documents/GitHub/Projet_Emulateur_AX12/dsPic30f2010-EmulateurAX12.X%20(Version%204Mhz%20+%20PLLx16)/Fichier_Define.h</file>
+            <file>file:/C:/Users/azerty/Documents/GitHub/Projet_Emulateur_AX12/dsPic30f2010-EmulateurAX12.X%20(Version%204Mhz%20+%20PLLx16)/Gestion_UART.c</file>
+            <file>file:/C:/Users/azerty/Documents/GitHub/Projet_Emulateur_AX12/dsPic30f2010-EmulateurAX12.X%20(Version%204Mhz%20+%20PLLx16)/eeprom.h</file>
         </group>
     </open-files>
 </project-private>

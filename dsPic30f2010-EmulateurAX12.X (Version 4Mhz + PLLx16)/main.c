@@ -67,12 +67,12 @@ int main(int argc, char** argv)
     //ResetEpprom();
     
     //Active RX
-    PORT_RX = Active_RX;
+    PORT_RX = Active_TX;
 
     while(lectureRAM(Lock) == Desactiver)  //Tand que le "lock" n'est pas activé.
     {
         Verifications();    //Vérifie la tension et le courant max
-        Interaction_LED();  //Fait clignoter la led si une erreur est trouvé
+        //Interaction_LED();  //Fait clignoter la led si une erreur est trouvé
         Interaction_AlarmShutdown();    //Arreter le moteur si une erreur grave est trouvé
         Interaction_Position(); //Lance le moteur
     }

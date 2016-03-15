@@ -101,7 +101,7 @@ void envoi_Trame(unsigned short _ID, unsigned short *parametres, unsigned short 
 
 void UART_RX()
 {
-    //PORTBbits.RB0 = 1;
+    PORTBbits.RB0 = 1;
     
     //if(U1STAbits.FERR == 0) //Si le bit de stop du message est bien à 1
     if(Flag_Timer_Reception == 0) //Si le delai de 100ms n'est pas passé
@@ -143,6 +143,8 @@ void UART_RX()
 
 void lectureTrame()
 {
+    //PORTBbits.RB0 = 1;
+    
     itr = 0;    //Si on arrive là alors sa veut dire que la réception est fini donc on reset l'iterateur de réception
     
     _ID = RXData[2];
@@ -158,7 +160,7 @@ void lectureTrame()
     }
     
     DerniereCheckSum += _ID + tailleRX + Instruction;
-    DerniereCheckSum = 255 - DerniereCheckSum%255;
+    DerniereCheckSum = 255 - DerniereCheckSum%256;
         
     if(CheckSumTrame == DerniereCheckSum)  
     { 
