@@ -49,8 +49,8 @@ void RAM_init()
     _PeriodePWM = 20;
     _RapportCycliquePWM = 25;
     
-    _TensionMax = 9.6;
-    _TensionMin = 9.6;
+    _TensionMax = 10.0;
+    _TensionMin = 9.0;
     
     _AngleMax = 300; //En degrés
 }

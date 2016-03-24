@@ -42,7 +42,9 @@ void Interaction_Position()
     if(lectureRAM(Couple) == Activer)   //Si le couple est activé
     {
         //Alors on controle ici le moteur
-        PWM_Position();
+        unsigned int RapportCyclique = lectureRAM(Rapport_Cyclique_PWM);
+        PWM_Position(RapportCyclique);
+        //PWM_rapportCyclique();
         PWM = Activer;
         while(PWM == Desactiver); //Attend que la PWM soit activé
     }

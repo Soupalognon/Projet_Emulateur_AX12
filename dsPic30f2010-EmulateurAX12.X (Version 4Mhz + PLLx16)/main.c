@@ -49,7 +49,7 @@ particular case.
 int main(int argc, char** argv) 
 {
     //Reset le baud Rate à chaque televersement du pic
-    Eeprom_WriteWord(Baud, Baud_9600);  //Baud Rate
+    //Eeprom_WriteWord(Baud, Baud_9600);  //Baud Rate
     //
     TRISB = Sortie;
     TRISD = Sortie;
@@ -67,12 +67,13 @@ int main(int argc, char** argv)
     //ResetEpprom();
     
     //Active RX
-    PORT_RX = Active_TX;
+    PORT_SERIE = Active_RX;
+    
 
     while(lectureRAM(Lock) == Desactiver)  //Tand que le "lock" n'est pas activé.
     {
         Verifications();    //Vérifie la tension et le courant max
-        //Interaction_LED();  //Fait clignoter la led si une erreur est trouvé
+        Interaction_LED();  //Fait clignoter la led si une erreur est trouvé
         Interaction_AlarmShutdown();    //Arreter le moteur si une erreur grave est trouvé
         Interaction_Position(); //Lance le moteur
     }

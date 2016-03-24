@@ -30,10 +30,9 @@ extern "C" {
     #define Sortie 0
 
     //RX et TX
-    #define PORT_RX PORTD
-    #define PORT_TX PORTD
-    #define Active_RX 0b01
-    #define Active_TX 0b10
+    #define PORT_SERIE PORTD
+    #define Active_RX 0b10
+    #define Active_TX 0b01
     
     #define PWM PTCONbits.PTEN
     

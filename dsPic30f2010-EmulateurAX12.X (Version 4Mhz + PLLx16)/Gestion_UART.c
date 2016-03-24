@@ -78,30 +78,39 @@ void envoi_Trame(unsigned short _ID, unsigned short *parametres, unsigned short 
     int i;
     
     //Active TX
-    PORT_TX = Active_TX;
-    
+    PORT_SERIE = Active_TX;
+    //delay_ms(1);
     delay_us(2 * Eeprom_ReadWord(Delai_Retour_Transmission));   //On attend le temps configuré dans le "Return Delay"
     
     UART_TX(0xFF);
+    //delay_us(10);
     UART_TX(0xFF);
+    //delay_us(10);
     UART_TX(_ID);//ID
+    //delay_us(10);
     UART_TX(nbParametres + 2);//Taille
+    //delay_us(10);
     UART_TX(Erreur);
+    //delay_us(10);
     for(i=0; i<nbParametres; i++)
     {
         UART_TX(parametres[i]);
         checkSum += parametres[i];
+        //delay_us(10);
     }
     UART_TX(255 - checkSum%256);
     
+    while(U1STAbits.TRMT == 0); //Attendre que le dernier bit soit envoyé
+    //delay_ms(100);
+    
     //Active RX
-    PORT_RX = Active_RX;
+    PORT_SERIE = Active_RX;
 }
 
 
 void UART_RX()
 {
-    PORTBbits.RB0 = 1;
+    //PORTBbits.RB0 = 1;
     
     //if(U1STAbits.FERR == 0) //Si le bit de stop du message est bien à 1
     if(Flag_Timer_Reception == 0) //Si le delai de 100ms n'est pas passé
@@ -243,6 +252,14 @@ void analyseTrame()
         
         else if(Instruction == WRITE)
         {
+            if(_ID != 0xFE && Eeprom_ReadWord(Status_Return_Level) == 2)
+            {
+                //unsigned short parametres[] = {};
+                unsigned short parametres[] = {Para[0], Para[1]};
+                envoi_Trame(_ID, parametres, 2);
+                calculErreur(RESET_ERR);
+            }
+            
             if(Para[0] >= 0 && Para[0] <= 23)
             {
                 Eeprom_WriteWord(Para[0], Para[1]);
@@ -258,18 +275,11 @@ void analyseTrame()
                 //Cette adresse n'existe pas ou n'est pas dans la ram
             }
 
-            if(_ID != 0xFE && Eeprom_ReadWord(Status_Return_Level) == 2)
-            {
-                unsigned short parametres[] = {Para[0], Para[1]};
-                envoi_Trame(_ID, parametres, 2);
-                calculErreur(RESET_ERR);
-            }
-            
-            if(Para[0] == 4)    //Change le baud Rate si demandé
+            if(Para[0] == Baud)    //Change le baud Rate si demandé
             {
                 UART_init();
             }
-            if(Para[0] == 51)
+            if(Para[0] == Periode_PWM)   //Change periode PWM si demandé
             {
                 PWM_init();
             }
